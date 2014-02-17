@@ -139,7 +139,7 @@ Dziękuję również wszystkim zainteresowanym osobom, które wypytywały mnie o
 \mainmatter
 
 \chapter{Wstęp}
-\section{Idea dokumentu}
+\section{Idea pracy dyplomowej}
 
 Niniejsza praca opisuje projekt i wykonanie mobilnego systemu komunikacji przeznaczonego dla Ośrodków Szkolenia Kierowców. Jego architekturę, część wizualną interfejsów, sposób instalacji i~uruchomienia, zalecane przypadki użycia oraz opracowane lub wykorzystane algorytmy.
 
@@ -153,7 +153,7 @@ Kolejnym założeniem było wykorzystanie języka JavaScript w każdej płaszczy
 
 \section{Cel pracy}
 
-Celem pracy jest projekt i realizacja systemu mającego za zadanie ułatwić pracę instruktorów Prawa Jazdy poprzez zautomatyzowanie wymiany informacji dotyczącej zajętości placów.
+Celem pracy jest projekt i realizacja systemu mającego za zadanie ułatwić pracę instruktorów Prawa Jazdy poprzez zautomatyzowanie wymiany informacji dotyczącej zajętości placów manewrowych, z których mogą korzystać.
 
 
 \section{Zakres pracy}
@@ -169,30 +169,74 @@ Projekt praktyczny, stworzony dla celów niniejszej pracy jest znaczną części
 
 
 \chapter{Wykorzystane technologie}
+
 \section{JavaScript}
-- Definicja
-- Coś o ECMAScript
-- Zastosowanie
+
+JavaScript jest prototypowym obiektowym językiem programowania. Jest to język Internetu, ze względu na to, że jego kod potrafi uruchomić prawie każda przeglądarka internetowa. Po ciężkim okresie, kiedy to został ogólnie przyjęty jako zabawka umożliwiająca tworzenie tzw. wodotrysków na stronach WWW, rozrósł znacząco i dzisiaj jest jednym z najpopularniejszych, a na pewno najsłynniejszym spośród internetowych języków programowania.
+
+Dzisiejszą "Dobę Internetu" pełnej technologii AJAX, rozbudowanych klienckich aplikacji internetowych, aplikacji internetowych przypominających desktopowe m.in. czytników RSS, aplikacji biurowych, klientów pocztowych, interaktywnych map, programów do obróbki grafiki i wideo etc. do historii odeszły długotrwałe wywołania stron wykonywane przy każdym wejściu użytkownika  w interakcję z przeglądarką. To wszystko możemy zawdzięczać głównie dzięki JavaScriptowi.
+
+Początkowe wersje interpreterów JavaScript zostały osadzone w jednych z pierwszych wersji przeglądarek Netscape i Internet Explorer. Ta kliencka wersja JavaScriptu pozwala na umieszczanie wykonywalnej zawartości w stronach internetowych, co pozwala na budowanie interakcji z użytkownikiem, to coś więcej niż statyczne strony WWW. Skrypty języka JavaScript odpowiedzialne są za część zachowawczą stron, kiedy to HTML (ang. HyperText Markup Language) opisuje zawartość i strukturę DOM (ang. Document Object Model) oraz treść, a CSS (ang. Cascading Style Sheets) opisuje wygląd tych elementów.
+
+JavaScript jest otwartym standardem, ale standaryzacją tego języka zajmuje się ECMA International (ang. ang. European Computer Manufacturers Association), która na jego podstawie wydała standard języka skryptowego o nazwie ECMAScript, którego już niedługo szósta wersja wprowadzić ma nowe mechanizmy obiektowości, takie jak np. pełnowymiarowe dziedziczenie za pomocą klas (które dzisiaj jest realizowane przez prototypowanie obiektów), modularyzację i hermetyzację (które dzisiaj są realizowane przez zewnętrzne biblioteki wprowadzające tego typu abstrakcje), a także wiele innych usprawnień, które zapewne przyciągną jeszcze większe rzesze programistów na całym świecie.
+
+Obecnie przeglądarki WWW to nie jedyne interpretery w obrębie których możliwe jest uruchomienie kodu JavaScript. Można tworzyć kod do zastosowań po stronie serwera WWW (m.in .NET lub Node.js), skrypty i aplikacje wiersza poleceń CLI (ang. Command Line Interface), aplikacje desktopowe (Node-webkit, Alchemium), aplikacje dla urządzeń przenośnych (m.in Sencha Touch, PhoneGap), aplikacje dla Smart TV (m.in. Mautilus), sterowanie mikrokomputerami takimi jak Raspberry PI (np. pijs.io) i Arduino (np. Johnny-Five, noduino), systemy operacyjne (Firefox OS, Chrome~OS) rozszerzenia aplikacji takich jak Adobe Photoshop, Google Chrome, Mozilla Firefox.
+
 
 \section{Node.js}
-- Geneza
-- silnik v8
-- Asynchroniczność
-- NPM
+
+Node.js jest stosunkowo nową platformą deweloperską stworzoną przez Ryana Dahla, pozwalającą programistom JavaScript na tworzenie kodu serwerowego o~wysokiej wydajności.
+
+Dokładniej rzecz ujmując jest to silnik Google V8 z projektu Chromium (Google Chrome) opakowany w taki sposób, aby można było go wykorzystywać jako niezależny interpreter z możliwościami podobnymi do~np.~Ruby, Pythona, PHP itd.
+
+Asynchroniczna, bazująca na zdarzeniach charakterystyka języka JavaScript sprawia, że Node.js jest bardzo wydajny, a~ze względu na jego uniwersalność i~wysoki poziom abstrakcji m.in. dynamiczne typowanie zmiennych, przyjazną składnię wbudowanych instrukcji i złożonych obiektów JSON (ang. JavaScript Object Notation), pisanie w nim to czysta przyjemność.
+
+Podobnie jak większość dystrybucji Linuksa lub języki programowania takie jak Ruby, Python czy PHP, Node.js posiada swój manager pakietów NPM (ang. Node Package Manager) agregujący ogromną ilość pakietów rozszerzających jego możliwości.
+
+Kolejnym atutem jest możliwość rozwijania kodu serwerowego i klienckiego w jednym języku programowania, przykładowo algorytmy walidacji, metody wejścia/wyjścia i operacje na plikach binarnych, co powoduje coraz większe zainteresowanie wśród programistów innych technologii typu server-side takich jak Python, PHP, Ruby, Java, Perl, C\#.
+
 
 \section{Socket.IO}
-- WebSocket
-- Eventy
-- Zdarzeniowa natura JS'a
+
+HTML5 WebSocket to technologia zapewniająca kanał komunikacji pomiędzy przeglądarką internetową, a serwerem internetowym w obu kierunkach za pomocą jednego gniazda TCP.
+
+Wszystkie nowoczesne przeglądarki wspierają już tą technologię, a Socket.IO jest biblioteką, która pozwala na stosunkowo szybkie tworzenie aplikacji czasu rzeczywistego w przeglądarkach i aplikacjach mobilnych za pomocą ujednoliconego interfejsu, zacierając przy tym różnice pomiędzy różnymi mechanizmami transportu i interpretacjami twórców oprogramowania.
+
+Węzeł komunikacji w przypadku WebSockets jest w przeciwieństwie do AJAX otwarty na stałe pomiędzy klientem, a serwerem. Jednak dane pomiędzy socketami są przesyłane poprzez HTTP jako obiekty XHR (XMLHttpRequest) podobnie jak w przypadku AJAX'a.
+
 
 \section{MongoDB}
-- Cechy noSQL
-- Zalety przechowywania danych jako JSON/BSON
+
+MongoDB jest nierelacyjną bazą danych (NoSQL), która przechowuje dane w formacie klucz-wartość o postaci dokumentów JSON, takim samym jak obiekty JavaScript, co sprawia, że nie ma potrzeby konwersji danych podczas odczytu i zapisu danych przez Node.js, dzięki temu wymiana danych jest szybsza niż w przypadku nierelacyjnych danych a komunikacja nie blokuje systemów wejścia/wyjścia.
+
+Dokumenty takie nie wymagają określonej struktury i dane w nich nie są sztywno powiązane relacjami, dzięki czemu są wysoce skalowalne i pozwalają na szybszy rozwój aplikacji dzięki skoncentrowaniu na celu, a nie środkach do jego osiągnięcia.
+
+\subsubsection{Mongoose}
+
+Istnieje wiele sterowników do MongoDB dla różnych języków programowania. W niniejszej pracy został użyty pakiet Mongoose.js, narzędzie typu ODM (Object Document Mapping), które dba o schemat modelu danych, jego walidację i zgodność typów dla konkretnych pól, a także abstrahuje relacyjne powiązania między kolekcjami bazy danych, jeśli zachodzi taka potrzeba.
+
 
 \section{PhoneGap}
-- Geneza
-- Cordova
-- Możliwości pisania natywnych komponentów
+
+PhoneGap\footnote{http://phonegap.com} jest frameworkiem do budowania aplikacji mobilnych o otwartym kodzie źródłowym stworzonym przez firmę Nitobi, z czasem odsprzedanym do Adobe Systems\footnote{http://www.adobe.com/pl/}, która to nadal czynnie rozwija produkt.
+
+Pozwala na tworzenie aplikacji webowych w technologiach HTML, CSS i Javascript, które po kompilacji za pośrednictwem PhoneGap umożliwiają uruchamianie ich jako natywnych aplikacji wybranego mobilnego systemu operacyjnego. 
+
+Pisząc jeden, uniwersalny kod źródłowy aplikacji można uzyskać pliki instalacyjne dla różnych platform mobilnych. W chwili pisania tego tekstu PhoneGap umożliwia kompilację do natywnych aplikacji dla:
+\begin{itemize}
+	\item Android
+	\item iOS
+	\item Blackberry OS 6.0+
+	\item Blackberry 10
+	\item WebOS
+	\item Windows Phone 7 + 8
+	\item Symbian
+	\item Bada
+\end{itemize}
+
+Sercem PhoneGap jest otwarty projekt Apeche Cordova, umożliwiający dostęp do niskopoziomowych warstw sprzętowych za pomocą wysokopoziomowych abstrakcji w języku JavaScript. 
+
+Jaśniej mówiąc, istnieje możliwość wykorzystania m.in. aparatu, akcelerometru, kompasu, odbiornika GPS, głośników i mikrofonu urządzania, na którym uruchamiana jest aplikacja, a także możliwy staje się dostęp do systemu plików z możliwością odczytu i zapisu, ustawień karty sieciowej urządzenia, listy kontaktów oraz emitowania zdarzeń takich jak powiadomienia zarówno dźwiękowych, jak i wibracyjnych.
 
 
 
