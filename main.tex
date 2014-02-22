@@ -1,4 +1,4 @@
- \documentclass[twoside,a4paper]{book}
+ \documentclass[twoside,a4paper,openright,12pt]{book}
 
 \usepackage[pdftex]{graphicx}
 \usepackage{amsmath}
@@ -13,19 +13,61 @@
 % pakiety służące do numerowania i tworzenia algorytmów
 \usepackage{algorithmic}
 \usepackage{algorithm}
+
+
 % redefinicja etykiety nagłówkowej listy algorytmów, domyślna jest po angielsku
 \renewcommand{\listalgorithmname}{Spis algorytmów}
 
 % pakiet do wyliczania skali, przydatny przy dużych obrazkach
 \usepackage{pgf}
+
 % pakiet służący do automatycznego sortowania odnośników do bibliografii
 \usepackage[sort]{natbib}
+
 % tworzenie listingów
 \usepackage{listings}
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{white},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
 % tworzenie figur wewnątrz figur
 \usepackage{subfig}
+
 % do automatycznego skracania nazw rozdziałów i podrozdziałów używanych w nagłówkach strony by mieściły się w jednej linii
 \usepackage[fit]{truncate}
+
 % fancyhdr - ładne nagłówki, definicja wyglądu nagłówka, numery stron będą umieszczane w nagłówku po odpowiedniej stronie
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -121,18 +163,25 @@
 % po zmianie marginesów konieczne jest wymuszenie przeliczenia nagłówków
 \fancyhfoffset[E,O]{0pt}
 
+\renewcommand\lstlistlistingname{Listingi kodu}
+
 \begin{document}
 % sekcja wstępna książki, numerowana rzymskimi
 \frontmatter
+
+% dodatkowy, nienumerowany rozdział na np. podziękowania
+\chapter*{Podziękowania}
+
+Pragnę podziękować mojemu Promotorowi za wsparcie merytoryczne i motywację, a także najbliższym mi osobom, za doping, wiarę w moje możliwości oraz wyrozumiałość, kiedy nie mogłem poświęcać Im tyle czasu, ile bym chciał.
+
+Dziękuję również wszystkim zainteresowanym osobom, które wypytywały mnie o szczegóły techniczne i postępy tej pracy. Dzięki Wam mogłem lepiej zrozumieć mój projekt.
+\addcontentsline{toc}{chapter}{Podziękowania}
+
 % spis treści
 \tableofcontents
 
 
-% dodatkowy, nienumerowany rozdział na np. podziękowania
-\chapter*{Podziękowania}
-Pragnę podziękować mojemu Promotorowi za wsparcie merytoryczne i motywację, a także najbliższym mi osobom, za doping, wiarę w moje możliwości oraz wyrozumiałość, kiedy nie mogłem poświęcać Im tyle czasu, ile bym chciał.
 
-Dziękuję również wszystkim zainteresowanym osobom, które wypytywały mnie o szczegóły techniczne i postępy tej pracy. Dzięki Wam mogłem lepiej zrozumieć mój projekt.
 
 
 % właściwa część książki, numerowana arabskimi od 1
@@ -141,7 +190,7 @@ Dziękuję również wszystkim zainteresowanym osobom, które wypytywały mnie o
 \chapter{Wstęp}
 \section{Idea pracy dyplomowej}
 
-Niniejsza praca opisuje projekt i wykonanie mobilnego systemu komunikacji przeznaczonego dla Ośrodków Szkolenia Kierowców. Jego architekturę, część wizualną interfejsów, sposób instalacji i~uruchomienia, zalecane przypadki użycia oraz opracowane lub wykorzystane algorytmy.
+Niniejsza praca opisuje projekt i wykonanie mobilnego systemu komunikacji przeznaczonego dla Ośrodków Szkolenia Kierowców roboczo nazwanego ,,OSK-Helper''. Jego architekturę, część wizualną interfejsów, sposób instalacji i~uruchomienia, zalecane przypadki użycia oraz opracowane lub wykorzystane algorytmy.
 
 
 \section{Założenia projektu}
@@ -168,13 +217,13 @@ Projekt praktyczny, stworzony dla celów niniejszej pracy jest znaczną części
 
 
 
-\chapter{Wykorzystane technologie}
+\chapter{Wykorzystywane technologie}
 
 \section{JavaScript}
 
 JavaScript jest prototypowym obiektowym językiem programowania. Jest to język Internetu, ze względu na to, że jego kod potrafi uruchomić prawie każda przeglądarka internetowa. Po ciężkim okresie, kiedy to został ogólnie przyjęty jako zabawka umożliwiająca tworzenie tzw. wodotrysków na stronach WWW, rozrósł znacząco i dzisiaj jest jednym z najpopularniejszych, a na pewno najsłynniejszym spośród internetowych języków programowania.
 
-Dzisiejszą "Dobę Internetu" pełnej technologii AJAX, rozbudowanych klienckich aplikacji internetowych, aplikacji internetowych przypominających desktopowe m.in. czytników RSS, aplikacji biurowych, klientów pocztowych, interaktywnych map, programów do obróbki grafiki i wideo etc. do historii odeszły długotrwałe wywołania stron wykonywane przy każdym wejściu użytkownika  w interakcję z przeglądarką. To wszystko możemy zawdzięczać głównie dzięki JavaScriptowi.
+Dzisiejszą ,,Dobę Internetu'' pełną technologii AJAX, rozbudowanych klienckich aplikacji internetowych przypominających desktopowe m.in. czytników RSS, aplikacji biurowych, klientów pocztowych, interaktywnych map, programów do obróbki grafiki i wideo etc. do historii odeszły długotrwałe wywołania stron wykonywane przy każdym wejściu użytkownika  w interakcję z przeglądarką. To wszystko możemy zawdzięczać głównie dzięki JavaScriptowi.
 
 Początkowe wersje interpreterów JavaScript zostały osadzone w jednych z pierwszych wersji przeglądarek Netscape i Internet Explorer. Ta kliencka wersja JavaScriptu pozwala na umieszczanie wykonywalnej zawartości w stronach internetowych, co pozwala na budowanie interakcji z użytkownikiem, to coś więcej niż statyczne strony WWW. Skrypty języka JavaScript odpowiedzialne są za część zachowawczą stron, kiedy to HTML (ang. HyperText Markup Language) opisuje zawartość i strukturę DOM (ang. Document Object Model) oraz treść, a CSS (ang. Cascading Style Sheets) opisuje wygląd tych elementów.
 
@@ -200,7 +249,7 @@ Kolejnym atutem jest możliwość rozwijania kodu serwerowego i klienckiego w je
 
 HTML5 WebSocket to technologia zapewniająca kanał komunikacji pomiędzy przeglądarką internetową, a serwerem internetowym w obu kierunkach za pomocą jednego gniazda TCP.
 
-Wszystkie nowoczesne przeglądarki wspierają już tą technologię, a Socket.IO jest biblioteką, która pozwala na stosunkowo szybkie tworzenie aplikacji czasu rzeczywistego w przeglądarkach i aplikacjach mobilnych za pomocą ujednoliconego interfejsu, zacierając przy tym różnice pomiędzy różnymi mechanizmami transportu i interpretacjami twórców oprogramowania.
+Wszystkie nowoczesne przeglądarki wspierają już tą technologię, a Socket.IO jest biblioteką, która pozwala na stosunkowo szybkie tworzenie aplikacji czasu rzeczywistego w przeglądarkach i~aplikacjach mobilnych za pomocą ujednoliconego interfejsu, zacierając przy tym różnice pomiędzy różnymi mechanizmami transportu i interpretacjami twórców oprogramowania.
 
 Węzeł komunikacji w przypadku WebSockets jest w przeciwieństwie do AJAX otwarty na stałe pomiędzy klientem, a serwerem. Jednak dane pomiędzy socketami są przesyłane poprzez HTTP jako obiekty XHR (XMLHttpRequest) podobnie jak w przypadku AJAX'a.
 
@@ -213,7 +262,7 @@ Dokumenty takie nie wymagają określonej struktury i dane w nich nie są sztywn
 
 \subsubsection{Mongoose}
 
-Istnieje wiele sterowników do MongoDB dla różnych języków programowania. W niniejszej pracy został użyty pakiet Mongoose.js, narzędzie typu ODM (Object Document Mapping), które dba o schemat modelu danych, jego walidację i zgodność typów dla konkretnych pól, a także abstrahuje relacyjne powiązania między kolekcjami bazy danych, jeśli zachodzi taka potrzeba.
+Istnieje wiele sterowników do MongoDB dla różnych języków programowania. W niniejszej pracy został użyty pakiet Mongoose.js, narzędzie typu ODM (Object Document Mapping), które dba o~schemat modelu danych, jego walidację i zgodność typów dla konkretnych pól, a także abstrahuje relacyjne powiązania między kolekcjami bazy danych, jeśli zachodzi taka potrzeba.
 
 
 \section{PhoneGap}
@@ -242,24 +291,299 @@ Jaśniej mówiąc, istnieje możliwość wykorzystania m.in. aparatu, akcelerome
 
 \chapter{Architektura systemu}
 
-\section{Serwer}
-- 
+\section{Aplikacja serwerowa}
+Zaplecze aplikacji to serwer napisany w Node.js korzystający z dobrodziejstw nierelacyjnej bazy danych MongoDB.
 
-\section{Klient}
-Tu opisać najpierw 3 podejścia do tworzenia aplikacji mobilnych
-- Przechowywanie w localstorage
+Umożliwia zarządzanie obiektami mającymi odzwierciedlić świat rzeczywisty określony dla Ośrodka Szkolenia Kierowców korzystającego ze stworzonego systemu informatycznego. Są to kolekcje placów manewrowych dostępnych do korzystania przez dany ośrodek szkolenia oraz instruktorów, którzy przynależą do tego ośrodka.
+
+
+
+\subsubsection{Routing aplikacji}
+
+Architektura aplikacji została zaprojektowana w zgodzie z metodologią REST (ang. Representational State Transfer), dzięki czemu konkretne akcje wykonywane są na podstawie adresu~URL (ang. Uniform Resource Locator) pod jaki kierowane jest żądanie HTTP (ang. Hypertext Transfer Protocol) oraz jego typu (GET lub POST).
+
+Jedną z głównych zalet takiego rozwiązania jest czytelność i intuicyjność nawigacji w serwisie.
+
+Na listingu \ref{lst:routing-kod} przedstawiony jest kod aplikacji (znajdujący się w pliku \texttt{app.js}) odpowiedzialny za routing -- przetwarzanie otrzymanego adresu żądania na akcje do wykonania po stronie serwera. \\
+\newpage
+
+\begin{lstlisting}[frame=single,label={lst:routing-kod},caption=Mapa routingu typu REST aplikacji serwerowej]
+/**
+ * Routing map.
+ */
+app.map({
+  '/': {
+    get: routes.index // Displays homepage
+  },
+
+  // Instructors Controller
+  '/instructors': {
+    get: instructors.findAll, // Displays all instructors list
+    post: instructors.addNew, // Saves new instructor to the database
+    '/:id': {
+      get: instructors.findById, // Displays details of instructor selected by ID
+      post: instructors.updateInstructor, // Updates data of one instructor selected by ID
+    },
+    '_new': {
+      get: instructors.createNew // Displays form for adding new instructor
+    },
+    '_edit/:id': {
+      get: instructors.editExisting // Displays form for editing selected instructor
+    },
+    '_delete/:id': {
+      get: instructors.deleteItem // Removes instructor selected by ID
+    },
+    '_generate': {
+      get: instructors.createNewWithFaker // Adds new instructor with generated fake data
+    }
+  },
+
+  // Places Controller
+  '/places': {
+    get: places.findAll, // Displays all places list
+    post: places.addNew, // Saves new place to the database
+    '/:id': {
+      get: places.findById, // Displays details of one place selected by ID
+      post: places.updatePlace // Updates data of one place selected by ID
+    },
+    '_new': {
+      get: places.createNew // Displays form for adding new place
+    },
+    '_edit/:id': {
+      get: places.editExisting // Displays form for editing selected place
+    },
+    '_delete/:id': {
+      get: places.deleteItem // Removes place selected by ID
+    },
+    '_generate': {
+      get: places.createNewWithFaker // Adds new place with generated fake data
+    }
+    ,'_test': {
+      get: places.testBase64 // 
+    }
+  },
+
+  // JSON API Controller
+  '/api': {
+    '/places': {
+      get: places.serveAllPlacesJson, // Responses with list of all places in JSON format
+      '/:id': {
+        get: places.serveOnePlaceJson, // Responses with dat of concrete place selected by ID in JSON format
+        post: places.occupyPlace // Marks selected place as occupied
+      }
+    },
+    '/instructors': {
+      get: instructors.serveAllInstructorsJson, // Responses with list of all instructors in JSON format
+      '/:id': {
+        get: instructors.serveOneInstructorJson, // Responses with dat of concrete instructors selected by ID in JSON format
+      }
+    },
+    '/login': {
+      get: auth.login // Authenticates mobile client before allows to exchange other data
+    }
+  }
+
+});
+\end{lstlisting}
+
+Analizując powyższy kod, można stwierdzić, że np. żądanie typu \texttt{GET} pod adresem URL \texttt{http://}\textit{adres\_serwera}\texttt{/places\_edit/5} zwróci formularz edycji placu o numerze ID 5, a żądanie typu \texttt{POST} pod adresem \texttt{http://}\textit{adres\_serwera}\texttt{/places/5} zaktualizuje ten plac nowymi danymi według przesłanych z formularza parametrów.
+
 
 \section{Model bazy danych}
+
+Baza danych MongoDB zawiera dwie główne kolekcje:
+\begin{itemize}
+\item{Inctructors}
+\item{Places}
+\end{itemize}
+
+Zachodzi w nich relacja jeden do jednego, ponieważ w danej chwili tylko jeden plac może być zajmowany przez jednego instruktora.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=1\textwidth]{screenshots/uml/db_schema.png}
+\caption{Schemat bazy danych}
+\end{figure}
+
+Do stworzenia schematu kolekcji dokumentów bazy danych MongoDB zostało wykorzystane narzędzie typu ODM o nazwie Mongoose (patrz rozdział 2. Wykorzystywane technologie).
+
+Listing \ref{lst:model placów} zawiera schemat bazy placów, a listing \ref{lst:model instruktorów} przedstawia schemat bazy instruktorów
+
+\begin{lstlisting}[frame=single,label={lst:model placów},caption=Schemat danych placów manewrowych -- plik: /models/places.js]
+// The Place model
+
+var mongoose 	= require('mongoose')
+  ,	Schema 		= mongoose.Schema
+  ,	ObjectId 	= Schema.ObjectId
+  , instructorSchema = require('./instructors');
+
+var placeSchema = new Schema({
+    place: ObjectId,
+    name: String,
+    address: String,
+    photo: String,
+    photoBase64: String,
+    coordinates: {
+      lat: Number,
+     	lng: Number
+    },
+    occupation: {
+        occupied: { 
+          type: Boolean,
+          default: false 
+        },
+        who: { 
+          type: ObjectId,
+          ref: 'Instructors'
+        }
+    }
+});I
+
+module.exports = mongoose.model('Place', placeSchema);
+\end{lstlisting}
+
+
+\begin{lstlisting}[frame=single,label={lst:model instruktorów},caption=Schemat danych instruktorów -- plik: /models/instructors.js]
+// The Instructors model
+
+var mongoose 	= require('mongoose')
+  ,	Schema 		= mongoose.Schema
+  ,	ObjectId 	= Schema.ObjectId;
+
+var instructorSchema = new Schema({
+    instructor: ObjectId,
+    name: String,
+    login: String,
+    password: String,
+    phone: String,  
+    email: String
+});
+
+module.exports = mongoose.model('Instructors', instructorSchema);
+\end{lstlisting}
+
+
 \section{Panel zarządzania}
-- Routing
+
+Panel zarządzania aplikacji umożliwia wykonywanie operacji CRUD (ang. Create-Read-Update-Delete) na danych aplikacji.
+
+Edycji użytkowników można dokonywać w obrębie \texttt{/instructors} -- jednego z~głównych kontrolerów aplikacji. A kontroler \texttt{/places} zawiera akcje odpowiedzialne za operacje na danych dotyczących placów manewrowych.
+
+
+\section{Klient mobilny}
+
+Można rozróżnić trzy sposoby wytwarzania aplikacji mobilnych, efektem których można wymienić 3 typy:
+\begin{itemize}
+\item aplikacje natywne,
+\item aplikacje webowe,
+\item aplikcje hybrydowe.
+\end{itemize}
+
+\subsubsection*{Aplikacje natywne}
+To oprogramowanie tworzone najczęściej w języku programowania takim jak np.~Java, Objective-C czy C\# w zależności od platformy. Są to aplikacje pisane pod konkretny system operacyjny i mogą korzystać ze wszystkich udogodnień i funkcji sprzętowych, jakie umożliwia dane urządzenie oraz ingerować w zachowania systemu i rozszerzać jego możliwości. Są bardzo szybkie i płynne, ich interfejs może wykorzystywać systemowe UI (np. Metro w Windows Phone, Holo w Androidzie), dzięki czemu ujednolicają się doskonale z systemem, co pozwala lepiej trafić w przyzwyczajenia użytkowników. Ich największą wadą jest koszt produkcji, ponieważ, aby dotrzeć do szerszego grona odbiorców, na każdy mobilny system operacyjny musi być przygotowana oddzielna aplikacja.
+
+\subsubsection*{Aplikacje webowe}
+To nic innego jak strony internetowe zbudowane w nowych technologiach webowych, które przypominają wyglądem aplikacje mobilne. Uruchamiane są w przeglądarce internetowej i przez to wymagają ciągłego połączenia z Internetem oraz niemożliwe jest wykorzystanie w nich funkcji sprzętowych urządzenia, jakimi są m.in. aparat, kamera, GPS, żyroskop, akcelerometr. Największą i chyba jedyną zaletą tego typu aplikacji jest dostępność. Nie trzeba nic instalować, wystarczy jedynie wpisać adres internetowy aplikacji w przeglądarce internetowej, aby ją uruchomić. Aplikacje takie są uniwersalne, ponieważ maszyną uruchomieniową jest przeglądarka, więc wystarczy jeden język programowania (najczęściej jest to JavaScript), aby stworzyć uniwersalną aplikację działającą na wszystkich platformach. Co sprawia, że tego typu oprogramowanie jest stosunkowo tanie w porównaniu z aplikacjami natywnymi, gdzie nakład pracy jest o wiele większy.
+
+\subsubsection*{Aplikacje hybrydowe}
+Czyli takie jak opisywana w niniejszej pracy. Jak sama nazwa wskazuje, jest to połączenie aplikacji natywnych i webowych. Użytkownicy często nie odróżniają ich od aplikacji natywnych, jednak w sporej części budowane są w technologiach webowych takich jak HTML5, CSS3 i JavaScript, więc możliwe jest stworzenie jednej wersji oprogramowania, które działać będzie na wielu platformach. Hybrydy, tak samo jak aplikacje mobilne instalowane są w systemie i dystrybuowane w sklepach z aplikacjami takimi jak App Store czy Google Play (dawniej Android Market).
+Jako, że po części napisane są w języku natywnym, a po części w webowym (wspomniane wcześniej HTML 5 czy CSS3), mają dostęp do pewnych funkcji urządzeń, na których są uruchamiane. Można wykorzystać dobrodziejstwa m.in. akcelerometru, GPS, mikrofonu, kamery, czy zapisywać i odczytywać dane z pamięci urządzenia.
+Aplikacje hybrydowe umożliwiają osiągnięcie idealnej proporcji pomiędzy jakością i możliwościami aplikacji natywnych, a niskim kosztem wytwarzania aplikacji webowych.
+
 
 \section{Komunikacja Klient-Serwer - API}
-- API
-- WYmiana JSON
+
+Dane pomiędzy klientem, a serwerem wymieniane są za pomocą protokołu JSONP (ang. JSON with padding) -- techniki komunikacyjnej umożliwiającej wykonywanie AJAX'owych zapytań do i z serwera znajdującego się w innej domenie. W normalnym przypadku taka wymiana danych nie jest możliwa ze względów bezpieczeństwa. Przeglądarki nie zezwalają na pobieranie obiektów JSON z zewnętrznego serwera w~celu zapobiegania atakom typu XSS (ang. Cross-site scripting). Udostępniają wykonywanym skryptom jedynie te obiekty, które pochodzą z tego samego źródła, co strona, w której kontekście są uruchamiane. JSONP polega na opakowaniu danych zwrotnych w funkcję typu ,,callback'', której parametr jest znany po obu stronach protokołu komunikacji, dzięki temu serwer zwraca dane jako zawartość funkcji do wywołania o takiej samej nazwie, jakiej spodziewa się klient. Kod zwrócony z serwera jest wstrzykiwany dynamicznie, a uruchomiony callback udostępnia pobrane dane do innych obiektów w przeglądarce.
+
+Listing \ref{lst:routing-kod} zawiera routing dla wszystkich akcji udostępniających metody wymiany danych poprzez JSONP znajdujących się w kontrolerze \texttt{/api}.
+Są w nim metody do pobierania list placów i instruktorów, a także do logowania.
+
+\subsubsection*{Pobranie danych aplikacji}
+Aplikacja po pomyślnym zalogowaniu pobiera listę placów i instruktorów w formacie JSON, zapisuje w lokalnej bazie danych WebSQL dostępnej w silniku renderującym WebKit wykorzystywanym w Androidzie oraz przetwarza je na interaktywne listy HTML wyświetlane jako zawartość aplikacji.
+
+\subsubsection*{Wymiana poleceń przez API}
+Każdy plac ma swój stan zajętości zapisywany w bazie i udostępniany do publicznej wiadomości pomiędzy instruktorami zalogowanymi do systemu.
+
+Informacje o zmianach tego stanu rozpraszane są w systemie za pośrednictwem HTML5 WebSockets, który wykorzystuje biblioteka Socket.IO użyta do stworzenia oprogramowania.
+
+W sytuacji, kiedy jeden z klientów usiłuje zająć jakiś plac, serwer otrzymuje o tym informację za pośrednictwem socketu, zapisuje do bazy danych informację o tym, że plac jest zajęty i przez kogo, w następstwie czego emituje wydarzenie, które jest propagowane do wszystkich klientów podłączonych do systemu z informacją o konieczności oznaczenia tego placu jako zajęty.
+
+Taki stan jest utrzymywany do momentu, kiedy instruktor zwolni plac i do serwera zostanie przesłana wiadomość o zmianie stanu. Po czym serwer zmienia stan w bazie danych i rozsyła analogiczny event do wszystkich połączonych klientów, aby umożliwili od nowa zajmowanie tego placu przez innych.
+
+Komunikacja pomiędzy socketami jest bardzo szybka, dzięki czemu w systemie nie ma opóźnień związanych z przepływem informacji.
+
 
 \chapter{Uruchomienie aplikacji}
+
 \section{Aplikacja serwerowa}
+
+Do uruchomienia aplikacji potrzebny jest interpreter Node.js. Można go pobrać ze strony projektu i zainstalować w systemie. Dostępne są dla wszystkich popularnych systemów operacyjnych. I uruchomić skrypt poleceniem \texttt{node app.js} w katalogu głównym projektu za pomocą wiersza poleceń.
+Od momentu uruchomienia aplikacji, serwer będzie nasłuchiwał na określonym w konfiguracji porcie -- domyślnie jest to port \texttt{3000}.
+
+Innym sposobem uruchomienia jest możliwość wykorzystania jednego z dostawców usług hostingowych typu PaaS (ang. Platform as a Service) takich jak np. AppFog (http://www.appfog.com/), Heroku (https://www.heroku.com/), czy OpenShift (https://www.openshift.com/) i uruchomienia aplikacji w chmurze jako usługa Node.js. Ta metoda jest uzależniona od wybranego usługodawcy i więcej informacji można uzyskać w dokumentacji dotyczącej tegoż hostingu.
+
+Oprócz działającego interpretera Node.js, który będzie w stanie uruchomić aplikację, potrzebna jest jeszcze baza danych MongoDB.
+Proces instalacji tego oprogramowania dla wybranych systemów operacyjnych jest szczegółowo opisany na stronie projektu (http://www.mongodb.org/). Gdzie są też dostępne binaria instalacyjne dla najpopularniejszych systemów operacyjnych.
+
+Najprostszym sposobem jest jednak skorzystanie z usług MongoLab (https://mongolab.com) -- platformy działającej w chmurze, umożliwiającej uruchomienie własnej instancji bazy danych MongoDB o rozmiarach do 500 MB za darmo.
+Po rejestracji i stworzeniu pierwszej bazy danych, otrzymamy dane potrzebne do połączenia z bazą.
+
+\subsubsection{Konfiguracja bazy danych}
+
+Ważnym plikiem służącym do konfiguracji połączenia z bazą jest znajdujący się w głównym katalogu aplikacji plik \texttt{config.json}, którego zawartość należy wyedytować wstawiając do niego prawidłowe dane do połączenia.
+Listing \ref{config.json} zawiera domyślną zawartość pliku konfiguracyjnego.\\
+
+
+\begin{lstlisting}[frame=single,caption=Domyślna zawartość pliku z konfiguracją połączenia do bazy danych -- plik: /config.json]
+{
+	"mongodb": {
+		"host" : "adres_serwera",
+		"port" : port, // np. 3456
+		"dbname" : "nazwa_bazy",
+		"user" : "uzytkownik_bazy",
+		"password" : "haslo_bazy"
+	}
+}
+\end{lstlisting}\label{config.json}
+
+
 \section{Aplikacja mobilna na platformę Android}
+
+Do uruchomienia klienta mobilnego potrzebny jest smartfon lub tablet z systemem operacyjnym Android oraz plik instalacyjny ze skompilowaną aplikacją.
+
+Aplikacja wymaga dostępu do Internetu, aby móc komunikować się z serwerem oraz włączonego GPS, w celu liczenia odległości do placów manewrowych wyświetlanych na liście.
+
+
+\subsubsection{Konfiguracja ścieżki serwera w aplikacji mobilnej}
+\label{konfiguracja_adresu_serwera}
+
+Przy pierwszym uruchomieniu zainstalowanej aplikacji pojawia się ekran wstępnej konfiguracji, w którym należy podać adres (IP, bądź domena) oraz port, na którym działa uruchomiony serwer stanowiący back-end systemu, co przedstawiają rysunki \ref{fig:ekran_poczatkowy1} (pusty formularz) oraz \ref{fig:ekran_poczatkowy2} (wypełniony danymi zgodnymi dla serwera testowego).
+
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.48\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{screenshots/android/konfiguracja_serwera.png}
+  %\captionof{figure}{Ekran początkowy - konfiguracja adresu serwera}
+  \captionof{figure}{}
+  \label{fig:ekran_poczatkowy1}
+\end{minipage}%
+\begin{minipage}{.04\textwidth}
+   ~
+\end{minipage}%
+\begin{minipage}{.48\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{screenshots/android/konfiguracja_serwera-wypelnione.png}
+  %\captionof{figure}{Ekran początkowy - konfiguracja adresu serwera - wypełnione przykładowe dane}
+  \captionof{figure}{}
+  \label{fig:ekran_poczatkowy2}
+\end{minipage}
+\end{figure}
+
+Po wprowadzeniu adresu hosta i portu aplikacja mobilna próbuje odpytać serwer pod wskazanym adresem, aby sprawdzić czy wprowadzone dane są poprawne (tzw. heartbeat).
+
+Jeśli serwer zwraca odpowiedź w formacie JSON o treści \texttt{\{'exists': true\}}, podany adres serwera jest zapisywany w pamięci aplikacji (HTML5 LocalStorage), po czym wyświetlany jest ekran logowania. Przy kolejnych uruchomieniach nie trzeba go podawać, aż do czasu wylogowania, które spowoduje wyczyszczenie lokalnej bazy danych aplikacji.
 
 
 \chapter{Panel zarządzania - konfiguracja}
@@ -268,239 +592,53 @@ Tu opisać najpierw 3 podejścia do tworzenia aplikacji mobilnych
 
 
 \chapter{Klient dla systemu Android - korzystanie}
+
 \section{Przykładowy przepływ }
 \section{Pogląd na listę placów}
 \section{Zajmowanie i zwalnianie placu}
 
 
-
-
-
-
-
-
-\chapter{Podstawowe elementy}
-
-To jest rozdział.
-
-\section{Sekcje dokumentu}
-
-W Latexu w klasie dokumentów \textbf{book} wyróżniamy rozdziały (\textbf{chapter}), podrozdziały \textbf{section}, podpodrozdziały \textbf{subsection}, podpodpodrozdziały \textbf{subsubsection} i paragrafy (\textbf{paragraph}). Podpodpodrozdziały i paragrafy domyślnie nie są numerowane ani nie występują w spisie treści. Zachowanie to można zmienić poprzez funkcję \textbf{setcounter} umieszczaną w preambule. Wykomentowany przykład można znaleźć w kodzie tego dokumentu.
-
-Obecnie znajdujemy się na poziomie podrozdziału. Pozostałe przykłady poniżej.
-
-\subsection{Podpodrozdział}
-
-To jest podpodrozdział.
-
-\subsubsection{Podpodpodrozdział}
-
-To jest podpodpodrozdział. On nie jest domyślnie numerowany.
-
-\paragraph{Paragraf}
-
-A to jest paragraf. On również nie jest domyślnie numerowany.
-
-\section{Podstawowe elementy typograficzne}
-
-\subsection{Twarda spacja}
-
-Twarda spacja jest bardzo istotnym elementem, gdyż zabrania Latex'owi łamanie linii w miejscu jej wystąpienia, a tym samym pozwoli na niejako ,,sklejenie'' wyrazów ze sobą. Dzięki temu możemy uniknąć tzw.\ sierot (pojedynczych znaków na końcu wiersza). W Latex twardą spację umieszcza się wstawiając znak tyldy~(\textasciitilde). Zapisujemy to więc np.\ tak: ,,dokument, w{\textasciitilde}którym''.
-
-\subsection{Formatowanie tekstu}
-
-Aby zapewnić poprawny wygląd tekstu należy pamiętać o kilku rzeczach:
-
-\begin{itemize}
- \item Linia poprzedzona procentem to komentarz.
- \item Poprzedzaniu spacji występującej po kropce kończącej skrót znakiem ucieczki, odstęp będzie wtedy taki, jak odstęp między wyrazami a~nie między zdaniami. Przykładowo zapis ,,np. tekst'' vs. ,,np.\ tekst''. Ten drugi jest poprawny, a zapisany został tak: ,,np.$\backslash$~tekst''.
- \item Skróty pisane wielkimi literami kończące zdanie powinny posiadać {$\backslash$}@ przed kropką kończącą zdanie, np.\ OCS{$\backslash$}@\@. Spowoduje to potraktowanie spacji jako spacji międzyzdaniowej z nie międzywyrazowej.
- \item Cudzysłowie zawsze tworzymy używając podwójnego przecinka jako symbolu otwierającego cudzysłów, oraz podwójnego apostrofu zamykającego cudzysłów.
- \item Kursywę uzyskujemy za pomocą słowa kluczowego {$\backslash$}textit, co w efekcie daje \textit{tekst kursywą}. Pogrubiony \textbf{używamy słowa kluczowego textbf}. Każdorazowo tekst mający być napisany danym krojem otaczamy nawiasami klamrowymi.
- \item Myślnik (--) tworzymy poprzez umieszczenie bezpośrednio po sobie dwu kresek (minusy). Różnica między nimi jest zasadnicza. Pojedynczy myślnik generuje krótką kreskę (-), podwójny długą (--), potrójny najdłuższą (---).
- \item Odwołania do różnych elementów dokumentu robimy poprzez słowo kluczowe \textbf{ref()}. Jako jego parametr wstawiamy nazwę zdefiniowaną za pomocą słowa kluczowego \textbf{label()}. Należy pamiętać, że odwołanie zwraca jedynie numer elementu, słowo opisowe, jak np.\ rozdział czy rysunek należy dodać samodzielnie. Polecam tutaj przyjąć jakąś konwencję i się jej trzymać w całym dokumencie. Tak samo należy postępować w przypadku etykiet.
- \item Latex doskonale radzi sobie z dzieleniem wyrazów na końcach linii, jednak czasami zachodzi konieczność wymuszenia podziału w określonym miejscu. W tym celu należy zastosować konstrukcję $\backslash$-. Latex takiego ukośnika nie wydrukuje dopóty, dopóki rzeczywiście w tym miejscu nie zostanie wykonane przeniesienie części wyrazu. Możliwe jest dodanie wielu podziałów w jednym wyrazie. Użyte wtedy zostanie to, które spowoduje wygenerowania ,,najładniejszego'' tekstu.
-\end{itemize}
-
-\section{Podział linii i paragrafy}
-\label{podzial}
-
-Nowy paragraf rozpoczyna się poprzez wstawienie jednej wolnej linii. Latex automatycznie wygeneruje wcięcie. Należy pamiętać, że pierwszy paragraf, zgodnie ze standardami drukarskimi, nie ma wcięcia! Możemy tym sterować za pomocą poleceń \textbf{noindent} (brak wcięcia) oraz \textbf{indent} (dodatkowe wcięcie).
-
-Jeżeli chcemy po prostu zrobić nową linię, bez tworzenia nowego paragrafu używamy konstrukcji $\backslash\backslash$. Efekt będzie taki, że paragraf\\
-będzie kontynuowany w nowej linii. Nie spowoduje to jednak rozciągnięcia poprzedniej linii. Zostanie ona przerwana tam gdzie tego sobie zażyczymy i kontynuowana w nowej linijce.
-
-A co w przypadku, gdy chcemy z jakiegoś powodu przerwać linię, ale wymusić justowanie tekstu? Weźmy dla przykładu fragment:
-
-Trzecim istotnym aspektem jest stosowana w~trakcie wytwarzania ontologii metodologia pracy~\cite{boinski2012kaskbook,boinski2011security}. Zastosowanie jednej z~uznawanych metodologii, takich jak Methontology, NeOn czy metodologia opracowana przez Noy~i~McGuiness, znacząco wpływa na jakoś uzyskanego produktu. Wspomniane metodologie w~dużej mierze uwzględniają potrzebę przyszłej integracji wiedzy, a~w połączeniu z~narzędziami typu Protégé czy OCS~\cite{boinski2007kaskbook,boinski2009ocs,boinski2010zespolowa}, pozwalają na tworzenie spójnych i~formalnie oraz logicznie poprawnych ontologii.
-
-Tekst zostaje bardzo brzydko złamany w środku odnośników do cytowań. Użycie podwójnego po słowie ,,metodologia'' w pierwszym zdaniu ukośnika da nam natomiast taki efekt:
-
-Trzecim istotnym aspektem jest stosowana w~trakcie wytwarzania ontologii metodologia \\ pracy~\cite{boinski2012kaskbook,boinski2011security}. Zastosowanie jednej z~uznawanych metodologii, takich jak Methontology, NeOn czy metodologia opracowana przez Noy~i~McGuiness, znacząco wpływa na jakoś uzyskanego produktu. Wspomniane metodologie w~dużej mierze uwzględniają potrzebę przyszłej integracji wiedzy, a~w połączeniu z~narzędziami typu Protégé czy OCS~\cite{boinski2007kaskbook,boinski2009ocs,boinski2010zespolowa}, pozwalają na tworzenie spójnych i~formalnie oraz logicznie poprawnych ontologii.
-
-Też nie ładnie, gdyż linijka jest niewyjustowana. Z pomocą przychodzi nam tutaj komenda \textbf{linebreak[]}, gdzie w nawiasie kwadratowym podajemy liczbę od 1 do 4 określająca jak bardzo zależy nam na tym, by linia została złamana w tym miejscu (4 to najwyższa wartość). Efekt jest następujący:
-
-Trzecim istotnym aspektem jest stosowana w~trakcie wytwarzania ontologii metodologia \linebreak[4] pracy~\cite{boinski2012kaskbook,boinski2011security}. Zastosowanie jednej z~uznawanych metodologii, takich jak Methontology, NeOn czy metodologia opracowana przez Noy~i~McGuiness, znacząco wpływa na jakoś uzyskanego produktu. Wspomniane metodologie w~dużej mierze uwzględniają potrzebę przyszłej integracji wiedzy, a~w połączeniu z~narzędziami typu Protégé czy OCS~\cite{boinski2007kaskbook,boinski2009ocs,boinski2010zespolowa}, pozwalają na tworzenie spójnych i~formalnie oraz logicznie poprawnych ontologii.
-
-Jeżeli z jakiegoś powodu potrzebujemy nową linię to używamy komendy \textbf{newpage}. \newpage Tekst występujący po niej znajdzie się na nowej stronie. Rozdziały itp.\ automatycznie generują nową stronę, przy czym w układzie dwustronnym nowy rozdział zawsze zacznie się od nieparzystej strony.
-
-\section{Środowisko matematyczne}
-
-Środowisko matematyczne otwieramy i zamykamy znakiem \$. Niektóre funkcje można używać tylko wewnątrz takiego środowiska. Przykładem niech będzie funkcja \textbf{mathcal} zamieniająca duże litery w symbole o charakterystycznym kroju, stosowanym do opisywania stałych, np.\ $\mathcal{O}$ czy $\mathcal{R(D,P,T,S,U,I)}$. Pamiętać należy, że zamienione zostaną wszystkie litery w wyrażeniu występującym wewnątrz nawiasów klamrowych.
-
-Niektóre konstrukcje, np.\ równania, automatycznie włączają tryb matematyczny. Równania dobrze jest opisać, przykład przedstawia Równanie~\ref{eq:przyklad}.
-
-\begin{equation}
-  \mathcal{O(K,B,C,R)}
-  \label{eq:przyklad}
-\end{equation}
-
-gdzie:\\
-$\mathcal{K}$ - zbiór klas wchodzących w~skład ontologii,\\
-$\mathcal{B}$ - zbiór bytów wchodzących w~skład ontologii,\\
-$\mathcal{C}$ - zbiór komentarzy przypisanych do klas $\mathcal{K}$ i~bytów $\mathcal{B}$ wchodzących w~skład ontologii,\\
-$\mathcal{R}$ - zbiór relacji wiążących elementy ontologii.
-
-
-W równaniach możemy stosować różne dodatkowe symbole oraz np.\ wyrównywać je do określonego miejsca. Służy do tego blok typu \textbf{split}, a sam punkt wyrównania określony jest ampersandem (\&). Przykład zastosowania prezentuje równanie~\ref{eq:split_ex}.
-
-\begin{equation}
-  \label{eq:split_ex}
-  \begin{split}
-    \forall {x_1 \leq y_1, x_2 \leq y_2}&: f(x_1+x_2,y_1+y_2)\\ 
-				  &= \frac{y_1}{y_1+y_2}f(x_1,y_1)+\frac{y_2}{y_1+y_2}f(x_2,y_2)
-  \end{split}
-\end{equation}
-
-\subsection{Twierdzenia i dowody}
-
-Linie 75 -- 93 nagłówka dokumentu definiują nowe nazwy sekcji twierdzeń i dowodów, oraz znacznik końca dowodu (taki czarny kwadracik). Dzięki nim można uzyskać ładnie wyglądające twierdzenia jak poniżej (Twierdzenie~\ref{eq:lin:theorem}). Zauważmy, że równanie dowodu nie jest równaniem numerowanym. Wszędzie tam, gdzie nie chcemy by rozdział czy dowolna inna sekcja była numerowana należy w jej nazwie użyć gwiazdki, np. \textbf{$\backslash$begin\{equation*\}}.
-
-\begin{theorem}
- Podobieństwo pomiędzy pojęciami $A$ i~$B$ opisane jest stosunkiem ilości informacji niezbędnej do opisania ich wspólności znaczeniowej oraz ilością informacji niezbędnej do ich opisania (Równanie~\ref{eq:lin:theoremeq}).
-
- \begin{equation}
-   sim_{lin}(A,B)=\frac{\log P(common(A,B))}{\log P(description(A,B))}
-   \label{eq:lin:theoremeq}
- \end{equation}
- \label{eq:lin:theorem}
-\end{theorem}
-
-\begin{proof}
-  \begin{equation*}
-   \begin{split}
-     f(x,y)&=f(x+0,y+(y-x))\\
-	   &=\frac{x}{y}*f(x,x) +~\frac{y-z}{x}*f(0,y-z)\\
-	   &=\frac{x}{y}*1 +~\frac{y-z}{x}*0\\
-	   &=\frac{x}{y} \qed
-   \end{split}
- \end{equation*}
-\end{proof}
-
-Inna ciekawa konstrukcja wykorzystująca tryb matematyczny do zapisania pewnego stwierdzenia:
-
-Niech $A \subseteq T$, $C = N_y(A) \neq W$, a~$\alpha_y = \min_{a \in A, b\notin C} \{y(a) +~y(b) - q(a, b)\}$ oraz
-
-\[ y'(v) = \left\{ \begin{array}{ll}
-                y(v) - \alpha_y & \mbox{jeżeli $v \in A$} \\
-                y(v) +~\alpha_y & \mbox{jeżeli $v \in C$} \\
-                y(v)            & \mbox{w innych przypadkach}
-               \end{array}
-       \right. \]
-
-Zapis ten, acz skomplikowany, pozwala na reprezentację złożonych reguł matematycznych w postaci ładnie ułożonych i wyrównanych wierszy. Reguły \textbf{left} oraz \textbf{right} pozwalają na utworzenie nawiasów klamrowych, których rozmiar będzie automatycznie dostosowywany do rozmiaru elementu, jakie mają zawierać.
-
-\chapter{Rysunki, tabele i inne konstrukcje}
-\enlargethispage{20pt}
-\section{Rysunki}
-\label{rysunki}
-Obrazki wstawiamy do dokumentu za pośrednictwem sekcji \textbf{figure}. Przykładowy wyśrodkowany rysunek z etykietą i opisem to Rys.~\ref{fig:obrazek}.
-
-W podanym przykładzie obrazek będzie wyśrodkowany, o szerokości odpowiadającej 70\% szerokości tekstu. Plik obrazka znajduje się w katalogu img i nazywa się obrazek.png. Latex dołoży starań, żeby umieścić go w tym miejscu (znacznik h w definicji figury). Wykrzyknik oznacza, że Latex bardzo się postara by obrazek tu był. Opisy obrazków zawsze znajdują się pod obrazkiem.
-
-Latex potrafi wygenerować spis wszystkich numerowanych figur i umieścić go w miejscu, gdzie użyjemy polecenia \textbf{listoffigures}.
-
-\subsection{Wielostronicowe obrazki}
-
-Czasami zdarza się, że obrazek jest tak duży, że umieszczenie go na jednej stronie powoduje, że stanie się nieczytelny. Latex umożliwia pocięcie obrazka na kawałki, przeskalowanie i przetworzenie tych kawałków, oraz wyświetlenie ich w postaci następujących po sobie figur, gdzie tylko pierwsza wskazana będzie numerowana i uwzględniona w spisie rysunków. Podpis pod każdą częścią będzie odmienny, numeracja będzie wspólna, w spisie wskazanie będzie do pierwszego z obrazków. Po szczegóły zapraszam do dokumentu w celu przeczytania komentarzy.
-
-
-% definition of the scale of the picture
-% here each part of the picture is rescaled
-% so that it will fit page swidth
-% 1255 is the original width of the picture
-% later on we can use \ratio command as a macro
-% that will rescale the fragment of the picture
-\pgfmathsetmacro{\ratio}{\the\textwidth/1255}
-% standard figure environment
-
-
-
-Należy zauważyć, że Latex dołoży wszelkich starań, by obrazek umieścić tam gdzie go sobie zażyczyliśmy. Czasami jest to jednak niemożliwe, ze względu na zbyt małą ilość tekstu i niestety trzeba pokombinować. Typowe zabiegi to próba dodania znacznika [!h] przy definicji figury, wstawienie obrazka wcześniej w tekście czy też lekka zmiana jego rozmiaru.
-
-\subsection{Wymuszanie renderowania obrazków do pewnego miejsca}
-
-Czasami zdarza się, że Latex zbyt długo zwleka z renderowanie obrazków, przez co w pamięci podręcznej zaczyna brakować miejsca. Najczęściej problem ten występuje, gdy dokument zawiera bardzo dużo obrazków, a raczej niewiele tekstu, lub relacje pomiędzy rozmiarami obrazków a liczbą słów są zachwiane i nie jest możliwe ich poprawne rozlokowanie.
-
-Wszystkie zaległe obrazki zawsze renderowane są na koniec rozdziału, jednak ich duże nagromadzenie może spowodować błąd przepełnienia pamięci. Czasami też koniec rozdziału jest zbyt odległym miejscem i lepiej po prostu wymusić renderowanie zaległych ramek w określonym miejscu. Służy temu komenda \textbf{$\backslash$clearpage}. Jej zastosowanie spowoduje renderowanie wszystkich, do tej pory nierozlokowanych obrazków.
-
-\section{Listingi}
-\label{listingi}
-\enlargethispage{-5cm}
-Tworzenie listingów umożliwia pakiet \textbf{listings}. Należy zwrócić uwagę, że etykiety i opisy listingów dodaje się w dośc specyficzny sposób jako parametry do bloku \textbf{lstlisting} (patrz kod dokumentu). Używając funkcji \textbf{lstset} możliwa jest zmiana kroju czcionki na inną niż reszty dokumentu. W przykładzie (Listing~\ref{kod:listingA}) zmniejszono czcionkę do rozmiaru indeksu dolnego.
-
-\lstset{basicstyle=\scriptsize}
-\begin{lstlisting}[frame=single,caption={Przykładowy listing},label=kod:listingA]
-<?xml version="1.0"?>
-
-<!DOCTYPE rdf:RDF [
- <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
- <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
- <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
- <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
-]>
-
-<rdf:RDF xmlns="http://kask.eti.pg.gda.pl/securityA.owl#"
- xml:base="http://kask.eti.pg.gda.pl/securityA.owl"
- xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
- xmlns:owl="http://www.w3.org/2002/07/owl#"
- xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
- xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
- <owl:Ontology rdf:about="http://kask.eti.pg.gda.pl/securityA.owl"/>
-
- <!-- 
- ///////////////////////////////////////////////////////////////////////////////////////
- //
- // Classes
- //
- ///////////////////////////////////////////////////////////////////////////////////////
- -->
-
- <!-- http://kask.eti.pg.gda.pl/securityA.owl#DSA -->
-
- <owl:Class rdf:about="http://kask.eti.pg.gda.pl/securityA.owl#DSA">
-  <rdfs:subClassOf rdf:resource="http://kask.eti.pg.gda.pl/securityA.owl#asymetryczne"/>
- </owl:Class>
-
-  
- <!-- http://kask.eti.pg.gda.pl/securityA.owl#RSA -->
-
- <owl:Class rdf:about="http://kask.eti.pg.gda.pl/securityA.owl#RSA">
-  <rdfs:subClassOf rdf:resource="http://kask.eti.pg.gda.pl/securityA.owl#asymetryczne"/>
- </owl:Class>
-
-  
- <!-- http://kask.eti.pg.gda.pl/securityA.owl#asymetryczne -->
-
- <owl:Class rdf:about="http://kask.eti.pg.gda.pl/securityA.owl#asymetryczne"/>
-  
-
- <!-- http://kask.eti.pg.gda.pl/securityA.owl#symetryczne -->
-
- <owl:Class rdf:about="http://kask.eti.pg.gda.pl/securityA.owl#symetryczne"/>
-</rdf:RDF>
-
-\end{lstlisting}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\textwidth]{screenshots/android/lista_instruktorow.png}
+\caption{Lista instruktorów}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\textwidth]{screenshots/android/lista_placow.png}
+\caption{Lista placów - sortowana według odległości}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\textwidth]{screenshots/android/logowanie.png}
+\caption{Ekran logowania użytkownika}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\textwidth]{screenshots/android/ustawienia.png}
+\caption{Ekran ustawień - możliwość wylogowania}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\textwidth]{screenshots/android/widok_szczegolowy_instruktora.png}
+\caption{Widok szczegółowy wybranego instruktora}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\textwidth]{screenshots/android/wyszukiwanie.png}
+\caption{Lista placów - przefiltrowana wg wyszukiwanego wzorca}
+\end{figure}
+
+
+\chapter{Wnioski}
+
+
+\chapter{Do usunięcia}
 
 \section{Algorytmy}
 \label{algorytmy}
@@ -561,252 +699,6 @@ Pakiety \textbf{algorithmic} oraz \textbf{algorithm} dostarczają środowiska do
 
 Podobnie jak w przypadku rysunków, algorytmy są automatycznie rozlokowywane w tekście przez system Latex.
 
-\section{Tabele}
-
-Latex pozwala na konstruowanie bardzo rozbudowanych tabel. Pełny opis możliwości znaleźć można w sieci Internet, a samo zagadnienie jest bardzo skomplikowane. Prosty przykład prezentuje Tabela~\ref{tab:tab1}.
-
-\begin{table}[h]
-\caption{Opis tabelki}
-\label{tab:tab1}
- \centering
-\begin{tabular}{|c|p{4.5cm}|p{6cm}|}
-  \hline
-  Pole 1 & Pole 2 & Pole 3\\
-  \hline
-  1 & Pojęcie & Opis tegoż pojęcia\\
-  \hline
-  2 & Pojęcie & Opis tegoż pojęcia\\
-  \hline
-\end{tabular}
-% \vspace{-0.5cm}
-\end{table}
-
-Pakiet \textbf{longtable} pozwala na generowanie ogromnych tabel rozłożonych na kilka stron.
-
-% this changes spacing between table rows, default is one, needs to be reset after the table!
-\renewcommand{\arraystretch}{0.85}
-% longtable definition, headers are defined in the same manner as normal table
-% here we change fontsize in each collumn to size smaller than tine defined in the preamble
-% all keywords within the table definition are the same as in standard table
-\begin{longtable}[h!]{|>{\tinyv}l|>{\tinyv}c|>{\tinyv}c|>{\tinyv}c|>{\tinyv}c|>{\tinyv}c|>{\tinyv}c|>{\tinyv}c|>{\tinyv}c|>{\tinyv}c|>{\tinyv}c|}
-\caption{Bardzo długa tabela (główna etykieta)\label{tab:long_table}}\\
-\endfirsthead
-\caption[]{(ciąg dalszy -- ten tekst pokazywać się będzie na kolejnych stronach)}\\
-\endhead
-\hline
-Lemma B~& \multicolumn{5}{>{\tinyv}c|}{Agency} & \multicolumn{5}{>{\tinyv}c|}{Area} \\
-\hline
-Lemma A~& $max(P_{lex},P_{sem})$ & $P_{kom}$ & $P_{str}$ & $P_{sk}$ & Wynik & $max(P_{lex},P_{sem})$ & $P_{kom}$ & $P_{str}$ & $P_{sk}$ & Wynik \\
-\hline
-Asset & 0,30 & 0,00 & 0,06 & 0,02 & Różne & 0,40 & 0,00 & 0,06 & 0,02 & Różne \\
-\hline
-Attack & 0,33 & 0,00 & 0,09 & 0,03 & Różne & 0,33 & 0,00 & 0,09 & 0,03 & Różne \\
-\hline
-Circumstance & 0,37 & 0,00 & 0,00 & 0,00 & Różne & 0,85 & X~& X~& X~& Rodzeństwo \\
-\hline
-Continuity & 0,31 & 0,00 & 0,13 & 0,04 & Różne & 0,42 & 0,00 & 0,13 & 0,04 & Różne \\
-\hline
-Error & 0,32 & 0,00 & 0,08 & 0,03 & Różne & 0,35 & 0,00 & 0,08 & 0,03 & Różne \\
-\hline
-Event & 0,46 & 0,00 & 0,10 & 0,03 & Różne & 0,40 & 0,00 & 0,10 & 0,03 & Różne \\
-\hline
-Group & 0,60 & 0,00 & 0,00 & 0,00 & Różne & 0,55 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Harm & 0,37 & 0,00 & 0,00 & 0,00 & Różne & 0,42 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Mission & 0,46 & 0,00 & 0,10 & 0,03 & Różne & 0,19 & 0,00 & 0,10 & 0,03 & Różne \\
-\hline
-Operation & 0,83 & X~& X~& X~& Rodzeństwo & 0,43 & 0,00 & 0,50 & 0,15 & Różne \\
-\hline
-Organization & 0,72 & X~& X~& X~& B~podrzędne A~& 0,35 & 0,00 & 0,10 & 0,03 & Różne \\
-\hline
-Potential & 0,36 & 0,00 & 0,00 & 0,00 & Różne & 0,41 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Risk & 0,32 & 0,00 & 0,17 & 0,05 & Różne & 0,20 & 0,00 & 0,17 & 0,05 & Różne \\
-\hline
-Security & 0,65 & 0,00 & 0,00 & 0,00 & Różne & 0,40 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Threat & 0,28 & 0,00 & 0,00 & 0,00 & Różne & 0,50 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Value & 0,30 & 0,00 & 0,11 & 0,03 & Różne & 0,47 & 0,00 & 0,11 & 0,03 & Różne \\
-\hline
-Vulnerability & 0,31 & 0,00 & 0,00 & 0,00 & Różne & 0,42 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Weakness & 0,34 & 0,00 & 0,11 & 0,03 & Różne & 0,44 & 0,00 & 0,11 & 0,03 & Różne \\
-\hline \hline
-Lemma B~& \multicolumn{5}{>{\tinyv}c|}{Asset} & \multicolumn{5}{>{\tinyv}c|}{Attack} \\
-\hline
-Lemma A~& $max(P_{lex},P_{sem})$ & $P_{kom}$ & $P_{str}$ & $P_{sk}$ & Wynik & $max(P_{lex},P_{sem})$ & $P_{kom}$ & $P_{str}$ & $P_{sk}$ & Wynik \\
-\hline
-Asset & 1,00 & X~& X~& X~& Tożsame & 0,17 & 0,00 & 0,39 & 0,12 & Różne \\
-\hline
-Attack & 0,17 & 0,00 & 0,85 & 0,25 & Różne & 1,00 & X~& X~& X~& Tożsame \\
-\hline
-Circumstance & 0,32 & 0,34 & 0,00 & 0,24 & Różne & 0,25 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Continuity & 0,27 & 0,00 & 0,50 & 0,15 & Różne & 0,26 & 0,00 & 0,25 & 0,08 & Różne \\
-\hline
-Error & 0,48 & 0,25 & 0,47 & 0,31 & Różne & 0,45 & 0,00 & 0,27 & 0,08 & Różne \\
-\hline
-Event & 0,32 & 0,20 & 0,64 & 0,33 & Różne & 0,51 & 0,00 & 0,42 & 0,13 & Różne \\
-\hline
-Group & 0,13 & 0,00 & 0,00 & 0,00 & Różne & 0,31 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Harm & 0,33 & 0,26 & 0,00 & 0,18 & Różne & 0,51 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Mission & 0,29 & 0,00 & 0,44 & 0,13 & Różne & 0,77 & X~& X~& X~& Rodzeństwo \\
-\hline
-Operation & 0,31 & 0,00 & 0,15 & 0,05 & Różne & 0,95 & X~& X~& X~& B~podrzędne A~\\
-\hline
-Organization & 0,55 & 0,31 & 0,35 & 0,33 & Różne & 0,76 & X~& X~& X~& Rodzeństwo \\
-\hline
-Potential & 0,32 & 0,22 & 0,00 & 0,16 & Różne & 0,46 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Risk & 0,20 & 0,29 & 0,46 & 0,34 & Różne & 0,40 & 0,00 & 0,18 & 0,05 & Różne \\
-\hline
-Security & 0,31 & 0,00 & 0,00 & 0,00 & Różne & 0,39 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Threat & 0,33 & 0,23 & 0,00 & 0,16 & Różne & 0,40 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Value & 0,64 & 0,00 & 0,38 & 0,11 & Różne & 0,20 & 0,00 & 0,14 & 0,04 & Różne \\
-\hline
-Vulnerability & 0,27 & 0,31 & 0,00 & 0,22 & Różne & 0,08 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Weakness & 0,47 & 0,22 & 0,38 & 0,27 & Różne & 0,13 & 0,00 & 0,14 & 0,04 & Różne \\
-\hline \hline
-Lemma B~& \multicolumn{5}{>{\tinyv}c|}{Circumstance} & \multicolumn{5}{>{\tinyv}c|}{Countermeasure} \\
-\hline
-Lemma A~& $max(P_{lex},P_{sem})$ & $P_{kom}$ & $P_{str}$ & $P_{sk}$ & Wynik & $max(P_{lex},P_{sem})$ & $P_{kom}$ & $P_{str}$ & $P_{sk}$ & Wynik \\
-\hline
-Asset & 0,32 & 0,00 & 0,11 & 0,03 & Różne & 0,14 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Attack & 0,25 & 0,00 & 0,18 & 0,05 & Różne & 0,31 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Circumstance & 1,00 & X~& X~& X~& Tożsame & 0,21 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Continuity & 0,33 & 0,00 & 0,25 & 0,08 & Różne & 0,29 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Error & 0,27 & 0,00 & 0,17 & 0,05 & Różne & 0,21 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Event & 0,99 & X~& X~& X~& A~podrzędne B~& 0,26 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Group & 0,17 & 0,00 & 0,00 & 0,00 & Różne & 0,14 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Harm & 0,52 & 0,00 & 0,00 & 0,00 & Różne & 0,33 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Mission & 0,25 & 0,00 & 0,20 & 0,06 & Różne & 0,20 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Operation & 0,41 & 0,00 & 0,33 & 0,10 & Różne & 0,29 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Organization & 0,34 & 0,00 & 0,20 & 0,06 & Różne & 0,34 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Potential & 0,39 & 0,00 & 0,00 & 0,00 & Różne & 0,29 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Risk & 0,23 & 0,00 & 0,33 & 0,10 & Różne & 0,21 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Security & 0,49 & 0,00 & 0,00 & 0,00 & Różne & 0,73 & X~& X~& X~& Rodzeństwo \\
-\hline
-Threat & 0,21 & 0,00 & 0,00 & 0,00 & Różne & 0,29 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Value & 0,33 & 0,00 & 0,22 & 0,07 & Różne & 0,21 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Vulnerability & 0,43 & 0,00 & 0,00 & 0,00 & Różne & 0,21 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Weakness & 0,36 & 0,00 & 0,22 & 0,07 & Różne & 0,14 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline \hline
-Lemma B~& \multicolumn{5}{>{\tinyv}c|}{Device} & \multicolumn{5}{>{\tinyv}c|}{Event} \\
-\hline
-Lemma A~& $max(P_{lex},P_{sem})$ & $P_{kom}$ & $P_{str}$ & $P_{sk}$ & Wynik & $max(P_{lex},P_{sem})$ & $P_{kom}$ & $P_{str}$ & $P_{sk}$ & Wynik \\
-\hline
-Asset & 0,08 & 0,00 & 0,00 & 0,00 & Różne & 0,32 & 0,13 & 0,39 & 0,21 & Różne \\
-\hline
-Attack & 0,37 & 0,00 & 0,00 & 0,00 & Różne & 0,51 & 0,00 & 0,64 & 0,19 & Różne \\
-\hline
-Circumstance & 0,21 & 0,00 & 0,00 & 0,00 & Różne & 0,99 & X~& X~& X~& B~podrzędne A~\\
-\hline
-Continuity & 0,27 & 0,00 & 0,00 & 0,00 & Różne & 0,32 & 0,00 & 0,25 & 0,08 & Różne \\
-\hline
-Error & 0,30 & 0,00 & 0,00 & 0,00 & Różne & 0,42 & 0,17 & 0,27 & 0,20 & Różne \\
-\hline
-Event & 0,34 & 0,00 & 0,00 & 0,00 & Różne & 1,00 & X~& X~& X~& Tożsame \\
-\hline
-Group & 0,13 & 0,00 & 0,00 & 0,00 & Różne & 0,24 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Harm & 0,40 & 0,00 & 0,00 & 0,00 & Różne & 0,51 & 0,18 & 0,00 & 0,12 & Różne \\
-\hline
-Mission & 0,24 & 0,00 & 0,00 & 0,00 & Różne & 0,37 & 0,00 & 0,21 & 0,06 & Różne \\
-\hline
-Operation & 0,27 & 0,00 & 0,00 & 0,00 & Różne & 0,57 & 0,00 & 0,29 & 0,09 & Różne \\
-\hline
-Organization & 0,41 & 0,00 & 0,00 & 0,00 & Różne & 0,41 & 0,22 & 0,13 & 0,20 & Różne \\
-\hline
-Potential & 0,22 & 0,00 & 0,00 & 0,00 & Różne & 0,67 & 0,14 & 0,00 & 0,10 & Różne \\
-\hline
-Risk & 0,26 & 0,00 & 0,00 & 0,00 & Różne & 0,41 & 0,18 & 0,18 & 0,18 & Różne \\
-\hline
-Security & 0,83 & X~& X~& X~& Rodzeństwo & 0,48 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Threat & 0,30 & 0,00 & 0,00 & 0,00 & Różne & 0,35 & 0,19 & 0,00 & 0,13 & Różne \\
-\hline
-Value & 0,18 & 0,00 & 0,00 & 0,00 & Różne & 0,32 & 0,00 & 0,14 & 0,04 & Różne \\
-\hline
-Vulnerability & 0,15 & 0,00 & 0,00 & 0,00 & Różne & 0,42 & 0,18 & 0,00 & 0,12 & Różne \\
-\hline
-Weakness & 0,25 & 0,00 & 0,00 & 0,00 & Różne & 0,35 & 0,23 & 0,14 & 0,21 & Różne \\
-\hline \hline
-Lemma B~& \multicolumn{5}{>{\tinyv}c|}{Group} & \multicolumn{5}{>{\tinyv}c|}{Harm} \\
-\hline
-Lemma A~& $max(P_{lex},P_{sem})$ & $P_{kom}$ & $P_{str}$ & $P_{sk}$ & Wynik & $max(P_{lex},P_{sem})$ & $P_{kom}$ & $P_{str}$ & $P_{sk}$ & Wynik \\
-\hline
-Asset & 0,13 & 0,00 & 0,00 & 0,00 & Różne & 0,33 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Attack & 0,31 & 0,00 & 0,00 & 0,00 & Różne & 0,51 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Circumstance & 0,17 & 0,00 & 0,00 & 0,00 & Różne & 0,52 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Continuity & 0,10 & 0,00 & 0,00 & 0,00 & Różne & 0,33 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Error & 0,20 & 0,00 & 0,00 & 0,00 & Różne & 0,45 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Event & 0,24 & 0,00 & 0,00 & 0,00 & Różne & 0,51 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Group & 1,00 & X~& X~& X~& Tożsame & 0,11 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Harm & 0,11 & 0,00 & 0,00 & 0,00 & Różne & 1,00 & X~& X~& X~& Tożsame \\
-\hline
-Mission & 0,46 & 0,00 & 0,00 & 0,00 & Różne & 0,26 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Operation & 0,17 & 0,00 & 0,00 & 0,00 & Różne & 0,39 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Organization & 0,87 & X~& X~& X~& A~podrzędne B~& 0,48 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Potential & 0,11 & 0,00 & 0,00 & 0,00 & Różne & 0,40 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Risk & 0,32 & 0,00 & 0,00 & 0,00 & Różne & 0,28 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Security & 0,43 & 0,00 & 0,00 & 0,00 & Różne & 0,50 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Threat & 0,17 & 0,00 & 0,00 & 0,00 & Różne & 0,25 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Value & 0,46 & 0,00 & 0,00 & 0,00 & Różne & 0,33 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Vulnerability & 0,09 & 0,00 & 0,00 & 0,00 & Różne & 0,44 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-Weakness & 0,10 & 0,00 & 0,00 & 0,00 & Różne & 0,36 & 0,00 & 0,00 & 0,00 & Różne \\
-\hline
-\end{longtable}
-% remember to reset table spacing!!!
-\renewcommand{\arraystretch}{1}
-
-\chapter{Inne przydatne konstrukcje}
-\section{Symbole otoczone kółkiem}
-
-Latex pozwala na tworzenie własnych znaków i symboli. W mojej rozprawie doktorskiej potrzebowałem zestawu symboli zamkniętych w okrąg, np.\ \mycircalign{+}, \mycircalign{-}, \mycircalign{k}. Za pomocą pakietu \textbf{tikz} zdefiniowałem dwa makra: \textbf{mycircalign} oraz \textbf{mycirc}. Pierwsze z nich otacza symbol kółkiem i wyrównuje powstały obrazek tak, by jego środek pokrywał się ze środkiem sąsiadujących znaków. Drugi układa elementy na linii tekstu, tak że spody znaków sąsiadujących i powstałego obrazka są wyrównane. Jak każde makro, również i te można używać zarówno w tekście jak i w środowisku matematycznym, tabelkach itp. (Równanie~\ref{eq:makro}).
-
-\begin{equation}
-  \mathcal{O}_3 = \mathcal{O}_1 \mycircalign{+} \mathcal{O}_2
-  \label{eq:makro}
-\end{equation}
 
 \section{Tymczasowa zmiana rozmiaru strony}
 
@@ -823,8 +715,10 @@ Wpisy bibliograficzne przechowujemy w odrębnym pliku z rozszerzeniem\ .bib. Prz
 
 % lista rysunków
 \listoffigures
+% lista listingów kodu
+\lstlistoflistings
 % lista tabel
-\listoftables
+%\listoftables
 % lista algorytmów
 \listofalgorithms
 
