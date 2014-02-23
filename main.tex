@@ -1,6 +1,7 @@
- \documentclass[twoside,a4paper,openright,12pt]{book}
+\documentclass[twoside,a4paper,openright,12pt]{book}
 
 \usepackage[pdftex]{graphicx}
+\usepackage{float}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{textcomp}
@@ -380,6 +381,9 @@ app.map({
     },
     '/login': {
       get: auth.login // Authenticates mobile client before allows to exchange other data
+    },
+    '/validate_existance': {
+      get: auth.validateExistance
     }
   }
 
@@ -465,7 +469,7 @@ module.exports = mongoose.model('Instructors', instructorSchema);
 
 \section{Panel zarządzania}
 
-Panel zarządzania aplikacji umożliwia wykonywanie operacji CRUD (ang. Create-Read-Update-Delete) na danych aplikacji.
+Panel zarządzania aplikacji umożliwia wykonywanie operacji CRUD (ang. Create-Read-Update-Destroy) na danych aplikacji.
 
 Edycji użytkowników można dokonywać w obrębie \texttt{/instructors} -- jednego z~głównych kontrolerów aplikacji. A kontroler \texttt{/places} zawiera akcje odpowiedzialne za operacje na danych dotyczących placów manewrowych.
 
@@ -510,8 +514,29 @@ W sytuacji, kiedy jeden z klientów usiłuje zająć jakiś plac, serwer otrzymu
 
 Taki stan jest utrzymywany do momentu, kiedy instruktor zwolni plac i do serwera zostanie przesłana wiadomość o zmianie stanu. Po czym serwer zmienia stan w bazie danych i rozsyła analogiczny event do wszystkich połączonych klientów, aby umożliwili od nowa zajmowanie tego placu przez innych.
 
+Algorytm tych działań przedstawia listing \ref{lst:socket}.
+
 Komunikacja pomiędzy socketami jest bardzo szybka, dzięki czemu w systemie nie ma opóźnień związanych z przepływem informacji.
 
+
+\begin{lstlisting}[frame=single,label={lst:socket},caption=Mechanizm obsługi socketów po stronie serwera]
+// Socket.IO events
+io.sockets.on('connection', function (socket) {
+
+  socket.on('placeIsOccupied', function (data) {
+    places.occupyPlace(data.place, data.instructor, function(){
+      io.sockets.emit('disablePlace', { place: data.place });  
+    });
+  });
+
+  socket.on('placeIsFree', function (data) {
+    places.releasePlace(data.place, function(){
+      io.sockets.emit('enablePlace', { place: data.place });  
+    });
+  });
+
+});
+\end{lstlisting}
 
 \chapter{Uruchomienie aplikacji}
 
@@ -520,21 +545,21 @@ Komunikacja pomiędzy socketami jest bardzo szybka, dzięki czemu w systemie nie
 Do uruchomienia aplikacji potrzebny jest interpreter Node.js. Można go pobrać ze strony projektu i zainstalować w systemie. Dostępne są dla wszystkich popularnych systemów operacyjnych. I uruchomić skrypt poleceniem \texttt{node app.js} w katalogu głównym projektu za pomocą wiersza poleceń.
 Od momentu uruchomienia aplikacji, serwer będzie nasłuchiwał na określonym w konfiguracji porcie -- domyślnie jest to port \texttt{3000}.
 
-Innym sposobem uruchomienia jest możliwość wykorzystania jednego z dostawców usług hostingowych typu PaaS (ang. Platform as a Service) takich jak np. AppFog (http://www.appfog.com/), Heroku (https://www.heroku.com/), czy OpenShift (https://www.openshift.com/) i uruchomienia aplikacji w chmurze jako usługa Node.js. Ta metoda jest uzależniona od wybranego usługodawcy i więcej informacji można uzyskać w dokumentacji dotyczącej tegoż hostingu.
+Innym sposobem uruchomienia jest możliwość wykorzystania jednego z dostawców usług hostingowych typu PaaS (ang. Platform as a Service) takich jak np. AppFog \footnote{http://www.appfog.com/}, Heroku \footnote{https://www.heroku.com/}, czy OpenShift \footnote{https://www.openshift.com/} i uruchomienia aplikacji w chmurze jako usługa Node.js. Ta metoda jest uzależniona od wybranego usługodawcy i więcej informacji można uzyskać w dokumentacji dotyczącej tegoż hostingu.
 
 Oprócz działającego interpretera Node.js, który będzie w stanie uruchomić aplikację, potrzebna jest jeszcze baza danych MongoDB.
-Proces instalacji tego oprogramowania dla wybranych systemów operacyjnych jest szczegółowo opisany na stronie projektu (http://www.mongodb.org/). Gdzie są też dostępne binaria instalacyjne dla najpopularniejszych systemów operacyjnych.
+Proces instalacji tego oprogramowania dla wybranych systemów operacyjnych jest szczegółowo opisany na stronie projektu \footnote{http://www.mongodb.org/}. Gdzie są też dostępne binaria instalacyjne dla najpopularniejszych systemów operacyjnych.
 
-Najprostszym sposobem jest jednak skorzystanie z usług MongoLab (https://mongolab.com) -- platformy działającej w chmurze, umożliwiającej uruchomienie własnej instancji bazy danych MongoDB o rozmiarach do 500 MB za darmo.
+Najprostszym sposobem jest jednak skorzystanie z usług MongoLab \footnote{https://mongolab.com} -- platformy działającej w chmurze, umożliwiającej uruchomienie własnej instancji bazy danych MongoDB o rozmiarach do 500 MB za darmo.
 Po rejestracji i stworzeniu pierwszej bazy danych, otrzymamy dane potrzebne do połączenia z bazą.
 
 \subsubsection{Konfiguracja bazy danych}
 
 Ważnym plikiem służącym do konfiguracji połączenia z bazą jest znajdujący się w głównym katalogu aplikacji plik \texttt{config.json}, którego zawartość należy wyedytować wstawiając do niego prawidłowe dane do połączenia.
-Listing \ref{config.json} zawiera domyślną zawartość pliku konfiguracyjnego.\\
+Listing \ref{lst:dbconfig} zawiera domyślną zawartość pliku konfiguracyjnego.\\
 
 
-\begin{lstlisting}[frame=single,caption=Domyślna zawartość pliku z konfiguracją połączenia do bazy danych -- plik: /config.json]
+\begin{lstlisting}[frame=single,label={lst:dbconfig},caption=Domyślna zawartość pliku z konfiguracją połączenia do bazy danych -- plik: /config.json]
 {
 	"mongodb": {
 		"host" : "adres_serwera",
@@ -544,7 +569,7 @@ Listing \ref{config.json} zawiera domyślną zawartość pliku konfiguracyjnego.
 		"password" : "haslo_bazy"
 	}
 }
-\end{lstlisting}\label{config.json}
+\end{lstlisting}
 
 
 \section{Aplikacja mobilna na platformę Android}
@@ -581,14 +606,85 @@ Przy pierwszym uruchomieniu zainstalowanej aplikacji pojawia się ekran wstępne
 \end{minipage}
 \end{figure}
 
-Po wprowadzeniu adresu hosta i portu aplikacja mobilna próbuje odpytać serwer pod wskazanym adresem, aby sprawdzić czy wprowadzone dane są poprawne (tzw. heartbeat).
+Po wprowadzeniu adresu hosta i portu aplikacja mobilna próbuje odpytać serwer pod wskazanym adresem z akcją \texttt{/api/validate\_existance}, aby sprawdzić czy wprowadzone dane są poprawne (tzw. heartbeat).
 
 Jeśli serwer zwraca odpowiedź w formacie JSON o treści \texttt{\{'exists': true\}}, podany adres serwera jest zapisywany w pamięci aplikacji (HTML5 LocalStorage), po czym wyświetlany jest ekran logowania. Przy kolejnych uruchomieniach nie trzeba go podawać, aż do czasu wylogowania, które spowoduje wyczyszczenie lokalnej bazy danych aplikacji.
 
 
 \chapter{Panel zarządzania - konfiguracja}
+
+Panel zarządzania służy do prawidłowego skonfigurowania obiektów świata aplikacji, który ma odzwierciedlać rzeczywistość, w ramach której działa Ośrodek Szkolenia Kierowców, a w zasadzie jego pracownicy korzystający z systemu.
+
+Możliwa jest edycja placów manewrowych i listy instruktorów z uwzględnieniem wszystkich operacji typu CRUD (ang. Create-Read-Update-Destroy). A zatem każdy z placów można edytować i usuwać, wyświetlić jego dane oraz dodać nowy plac do modelu danych aplikacji.
+
+
+\newpage
 \section{Zarządzanie listą placów manewrowych}
+
+Ważne jest prawidłowe skonfigurowanie wszystkich placów, aby instruktorzy mogli z nich korzystać.
+
+W momencie, kiedy w bazie nie ma jeszcze dodanych żadnych placów, najważniejszym ekranem jest formularz dodawania nowego placu (Rysunek \ref{fig:Nowy_plac}).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{screenshots/panel/nowy_plac.png}
+\caption{Formularz dodawania nowego placu}
+\label{fig:Nowy_plac}
+\end{figure}
+
+Interaktywna mapa pozwala na precyzyjne określenie współrzędnych. Pola zawierające koordynaty GPS są automatycznie uaktualniane w momencie kliknięcia w wybrany punkt na mapie.
+
+Przesyłane na serwer zdjęcie placu jest przy okazji zapisu przetwarzane na ciąg znaków w formacie Base64  i również zapisywane do bazy danych.
+Takie zdjęcie zakodowane w formie tekstowej jest przesyłane wraz z innymi danymi placów do aplikacji mobilnej, która z powrotem potrafi je wyświetlić jako obrazek i przetrzymywać w swojej lokalnej bazie danych.\newline \newline
+
+
+Na rysunku \ref{fig:Lista_placow} przedstawiony jest ekran z listą, na której widoczne jest kilka pierwszych placów wprowadzonych do bazy danych. Wprowadzone dane są wygenerowane losowo przy pomocy biblioteki Faker.js \footnote{https://github.com/marak/Faker.js/}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{screenshots/panel/lista_placow.png}
+\caption{Lista utworzonych placów manewrowych}
+\label{fig:Lista_placow}
+\end{figure}
+
+Plac o nazwie ,,Plac \#23'' na powyższym rysunku jest oznaczony jako zajęty. Wszystkie tego typu place są podświetlone wyblakłym odcieniem koloru czerwonego.
+
+\newpage
+Rysunek \ref{fig:Edycja_placu} przedstawia widok formularza do edycji danych wybranego placu.
+
+Nie różni się on bardzo od formularza dodawania nowego placu poza tym, że ustawione aktualnie pola są już wypełnione bieżącymi danymi oraz nad częścią dotyczącą wstawiania nowego zdjęcia widnieje podgląd aktualnie wstawionej miniaturki.
+
+Istnieje możliwość zmiany nazwy placu, adresu, współrzędnych i wgrania nowego zdjęcia.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1\textwidth]{screenshots/panel/edycja_placu.png}
+\caption{Edycja wybranego placu manewrowego}
+\label{fig:Edycja_placu}
+\end{figure}
+
+\newpage
 \section{Zarządzanie listą instruktorów}
+
+W przypadku konfiguracji bazy instruktorów należy postępować analogicznie.
+
+Rysunek \ref{fig:Nowy_instruktor} przedstawia ekran z formularzem dodawania nowego instruktora. Wymienić można pola takie jak: jego nazwa osobowa, login i hasło, których będzie używał do logowania w aplikacji mobilnej oraz danych kontaktowych takich jak telefon i mail, do których wgląd będą mieli inni instruktorzy z poziomu mobilnego klienta.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{screenshots/panel/nowy_instruktor.png}
+\caption{Formularz dodawania nowego instruktora}
+\label{fig:Nowy_instruktor}
+\end{figure}
+
+\newpage
+Po dodaniu kilku instruktorów lista wygląda tak, jak to przedstawia rysunek \ref{fig:Nowy_instruktor}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{screenshots/panel/lista_instruktorow.png}
+\caption{Lista dodanych instruktorów}
+\end{figure}
 
 
 \chapter{Klient dla systemu Android - korzystanie}

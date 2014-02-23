@@ -21,18 +21,18 @@
 \contentsline {section}{\numberline {3.5}Komunikacja Klient-Serwer - API}{13}
 \contentsline {chapter}{\numberline {4}Uruchomienie aplikacji}{15}
 \contentsline {section}{\numberline {4.1}Aplikacja serwerowa}{15}
-\contentsline {subsubsection}{Konfiguracja bazy danych}{15}
+\contentsline {subsubsection}{Konfiguracja bazy danych}{16}
 \contentsline {section}{\numberline {4.2}Aplikacja mobilna na platform\IeC {\k e} Android}{16}
 \contentsline {subsubsection}{Konfiguracja \IeC {\'s}cie\IeC {\.z}ki serwera w aplikacji mobilnej}{16}
 \contentsline {chapter}{\numberline {5}Panel zarz\IeC {\k a}dzania - konfiguracja}{19}
-\contentsline {section}{\numberline {5.1}Zarz\IeC {\k a}dzanie list\IeC {\k a} plac\IeC {\'o}w manewrowych}{19}
-\contentsline {section}{\numberline {5.2}Zarz\IeC {\k a}dzanie list\IeC {\k a} instruktor\IeC {\'o}w}{19}
-\contentsline {chapter}{\numberline {6}Klient dla systemu Android - korzystanie}{21}
-\contentsline {section}{\numberline {6.1}Przyk\IeC {\l }adowy przep\IeC {\l }yw }{21}
-\contentsline {section}{\numberline {6.2}Pogl\IeC {\k a}d na list\IeC {\k e} plac\IeC {\'o}w}{21}
-\contentsline {section}{\numberline {6.3}Zajmowanie i zwalnianie placu}{21}
-\contentsline {chapter}{\numberline {7}Wnioski}{29}
-\contentsline {chapter}{\numberline {8}Do usuni\IeC {\k e}cia}{31}
-\contentsline {section}{\numberline {8.1}Algorytmy}{31}
-\contentsline {section}{\numberline {8.2}Tymczasowa zmiana rozmiaru strony}{33}
-\contentsline {section}{\numberline {8.3}Wpisy bibliograficzne}{33}
+\contentsline {section}{\numberline {5.1}Zarz\IeC {\k a}dzanie list\IeC {\k a} plac\IeC {\'o}w manewrowych}{20}
+\contentsline {section}{\numberline {5.2}Zarz\IeC {\k a}dzanie list\IeC {\k a} instruktor\IeC {\'o}w}{23}
+\contentsline {chapter}{\numberline {6}Klient dla systemu Android - korzystanie}{25}
+\contentsline {section}{\numberline {6.1}Przyk\IeC {\l }adowy przep\IeC {\l }yw }{25}
+\contentsline {section}{\numberline {6.2}Pogl\IeC {\k a}d na list\IeC {\k e} plac\IeC {\'o}w}{25}
+\contentsline {section}{\numberline {6.3}Zajmowanie i zwalnianie placu}{25}
+\contentsline {chapter}{\numberline {7}Wnioski}{33}
+\contentsline {chapter}{\numberline {8}Do usuni\IeC {\k e}cia}{35}
+\contentsline {section}{\numberline {8.1}Algorytmy}{35}
+\contentsline {section}{\numberline {8.2}Tymczasowa zmiana rozmiaru strony}{37}
+\contentsline {section}{\numberline {8.3}Wpisy bibliograficzne}{37}
