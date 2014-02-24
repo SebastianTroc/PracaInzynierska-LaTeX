@@ -1,0 +1,59 @@
+\begin{thebibliography}{10}
+
+\bibitem{chodorow2013mongodb}
+Kristina Chodorow.
+\newblock {\em MongoDB, the definitive guide}.
+\newblock O'Reilly Media, Sebastopol, Calif, 2013.
+
+\bibitem{crockford2008javascript}
+Douglas Crockford.
+\newblock {\em JavaScript : the good parts}.
+\newblock O'Reilly, Beijing Cambridge, 2008.
+
+\bibitem{flanagan2002javascript}
+David Flanagan.
+\newblock {\em JavaScript : przewodnik programisty}.
+\newblock Wydaw. RM, Warszawa, 2002.
+
+\bibitem{jain2012jquery}
+Chetan Jain.
+\newblock {\em JQuery Mobile Cookbook}.
+\newblock Packt Pub, Birmingham, 2012.
+
+\bibitem{kiessling2012the}
+Manuel Kiessling.
+\newblock {\em The node beginner book : a comprehensive node.js tutorial}.
+\newblock lulu.com, Raleigh, North Carolina, 2012.
+
+\bibitem{maccaw2012javascript}
+Alex MacCaw.
+\newblock {\em JavaScript : aplikacje WWW}.
+\newblock Wydawnictwo Helion, Gliwice, 2012.
+
+\bibitem{means2012node}
+Garann Means.
+\newblock {\em Node for front-end developers}.
+\newblock O'Reilly Media, Sebastopol, CA, 2012.
+
+\bibitem{powers2012learning}
+Shelley Powers.
+\newblock {\em Learning Node}.
+\newblock O'Reilly Media, Sebastopol, Calif, 2012.
+
+\bibitem{stark2013android}
+Jonathan Stark.
+\newblock {\em Android : tworzenie aplikacji w oparciu o HTML, CSS i
+  JavaScript}.
+\newblock Helion, Gliwice, 2013.
+
+\bibitem{stefanov2010javascript}
+S.~Stefanov and J.~Walkowska.
+\newblock {\em JavaScript: programowanie obiektowe}.
+\newblock Helion, 2010.
+
+\bibitem{stefanov2012javascript}
+Stoyan Stefanov.
+\newblock {\em JavaScript. Wzorce}.
+\newblock Helion, Gliwice, 2012.
+
+\end{thebibliography}

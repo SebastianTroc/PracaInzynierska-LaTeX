@@ -1,6 +1,8 @@
 \documentclass[twoside,a4paper,openright,12pt]{book}
 
+
 \usepackage[pdftex]{graphicx}
+\usepackage{pdfpages}
 \usepackage{float}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -23,7 +25,7 @@
 \usepackage{pgf}
 
 % pakiet służący do automatycznego sortowania odnośników do bibliografii
-\usepackage[sort]{natbib}
+%\usepackage[sort]{natbib}
 
 % tworzenie listingów
 \usepackage{listings}
@@ -167,6 +169,13 @@
 \renewcommand\lstlistlistingname{Listingi kodu}
 
 \begin{document}
+
+%wyłącznie numerowania stron
+\pagenumbering{gobble}
+
+% wklejenie strony tytułowej z oddzielnego PDFa
+\includepdf[pages={1}]{StronaTytulowa.pdf}
+
 % sekcja wstępna książki, numerowana rzymskimi
 \frontmatter
 
@@ -180,9 +189,6 @@ Dziękuję również wszystkim zainteresowanym osobom, które wypytywały mnie o
 
 % spis treści
 \tableofcontents
-
-
-
 
 
 % właściwa część książki, numerowana arabskimi od 1
@@ -591,7 +597,7 @@ Przy pierwszym uruchomieniu zainstalowanej aplikacji pojawia się ekran wstępne
   \centering
   \includegraphics[width=1\linewidth]{screenshots/android/konfiguracja_serwera.png}
   %\captionof{figure}{Ekran początkowy - konfiguracja adresu serwera}
-  \captionof{figure}{}
+  \captionof{figure}{Konfiguracja adresu serwera - pusty formularz}
   \label{fig:ekran_poczatkowy1}
 \end{minipage}%
 \begin{minipage}{.04\textwidth}
@@ -601,7 +607,7 @@ Przy pierwszym uruchomieniu zainstalowanej aplikacji pojawia się ekran wstępne
   \centering
   \includegraphics[width=1\linewidth]{screenshots/android/konfiguracja_serwera-wypelnione.png}
   %\captionof{figure}{Ekran początkowy - konfiguracja adresu serwera - wypełnione przykładowe dane}
-  \captionof{figure}{}
+  \captionof{figure}{Konfiguracja adresu serwera - wypełniony formularz}
   \label{fig:ekran_poczatkowy2}
 \end{minipage}
 \end{figure}
@@ -689,123 +695,134 @@ Po dodaniu kilku instruktorów lista wygląda tak, jak to przedstawia rysunek \r
 
 \chapter{Klient dla systemu Android - korzystanie}
 
-\section{Przykładowy przepływ }
-\section{Pogląd na listę placów}
-\section{Zajmowanie i zwalnianie placu}
-
-
-\begin{figure}[htbp]
+\section{Przypadki użycia}
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{screenshots/android/lista_instruktorow.png}
-\caption{Lista instruktorów}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.7\textwidth]{screenshots/android/lista_placow.png}
-\caption{Lista placów - sortowana według odległości}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.7\textwidth]{screenshots/android/logowanie.png}
+\includegraphics[width=1\textwidth]{screenshots/uml/usecases.png}
 \caption{Ekran logowania użytkownika}
+\label{fig:Diagram przypadków użycia}
 \end{figure}
 
-\begin{figure}[htbp]
+
+\section{Logowanie}
+Aby instruktor miał możliwość korzystania z systemu, monitorowania zajętości placów oraz ingerowania w ich stan, musi być zalogowany.
+
+Podczas pierwszego uruchomienia, tuż po poprawnym podaniu adresu serwera, pojawia się ekran logowania (rysunek \ref{fig:Logowanie_mobile}), w którym należy podać prawidłową nazwę użytkownika i hasło przypisane do instruktora.
+
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{screenshots/android/ustawienia.png}
-\caption{Ekran ustawień - możliwość wylogowania}
+\includegraphics[width=0.5\textwidth]{screenshots/android/logowanie.png}
+\caption{Ekran logowania użytkownika}
+\label{fig:Logowanie_mobile}
 \end{figure}
 
-\begin{figure}[htbp]
+Serwer waliduje przesłany login i hasło, następnie w przypadku poprawnych danych zwraca dane umożliwiające wyrenderowanie ekranów aplikacji.
+
+
+\section{Podgląd listy placów}
+Domyślnym widokiem wyświetlonym po pomyślnym zalogowaniu jest lista placów.
+
+Na podstawie położenia GPS lista jest sortowana wg odległości placów. Najbliżej położone punkty znajdują się na początku listy.
+
+Każdy element listy zawiera nazwę placu, jego adres oraz odległość. Do obliczania odległości zostało wykorzystane Google Maps API.
+
+Rysunek \ref{fig:Lista_placow_mobile} przedstawia ekran prezentujący listę placów.
+
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{screenshots/android/widok_szczegolowy_instruktora.png}
-\caption{Widok szczegółowy wybranego instruktora}
+\includegraphics[width=0.5\textwidth]{screenshots/android/lista_placow.png}
+\caption{Lista placów - sortowana według odległości}
+\label{fig:Lista_placow_mobile}
 \end{figure}
 
-\begin{figure}[htbp]
+Widoczny jest na nim zielony pasek z polem wyszukiwania. Wystarczy zacząć wpisywać w nim tekst, a elementy listy dynamicznie zostają zawężane do wyników wyszukiwania wg wpisanego wzorca. Wyszukiwanie jest dokonywane zarówno w nazwie, jak i adresie placu.
+
+Efekt wyszukiwania można zaobserwować na rysunku \ref{fig:Lista_placow-przefiltrowana_mobile}.
+
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{screenshots/android/wyszukiwanie.png}
+\includegraphics[width=0.5\textwidth]{screenshots/android/wyszukiwanie.png}
 \caption{Lista placów - przefiltrowana wg wyszukiwanego wzorca}
+\label{fig:Lista_placow-przefiltrowana_mobile}
 \end{figure}
 
 
-\chapter{Wnioski}
+\subsection{Zajmowanie i zwalnianie placu}
+
+Po wciśnięciu wybranego placu zostaje rozpropagowana w systemie informacja o zajętości tego placu, a użytkownik zostaje przeniesiony na ekranz  widokiem szczegółowym, który przedstawia rysunek \ref{fig:Zajmowany_plac_mobile}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{screenshots/android/szczegoly_placu.png}
+\caption{Widok szczegółowy zajmowanego placu}
+\label{fig:Zajmowany_plac_mobile}
+\end{figure}
+
+Widoczna jest interaktywna mapa z położeniem placu, zaimplementowana z wykorzystaniem Google Maps, którą można dowolnie przybliżać, oddalać, przesuwać oraz przełączyć się na widok satelitarny lub panoramiczny.
+
+Przycisk ,,Zwolnij plac'' pozwala wrócić do poprzedniego ekranu jednocześnie wysyłając do serwera informację o zwolnieniu placu.
 
 
-\chapter{Do usunięcia}
-
-\section{Algorytmy}
-\label{algorytmy}
-Pakiety \textbf{algorithmic} oraz \textbf{algorithm} dostarczają środowiska do definiowania algorytmów. Można za ich pomocą definiować zarówno pseudokod jak i algorytmy ogólne. Pseudokod przedstawia Algorytm~\ref{tboi:alg}. Przykładową ogólną reprezentację algorytmu Levenshteina obrazuje Algorytm~\ref{tboi:alg_leven}.
-
-\begin{algorithm}
- \floatname{algorithm}{Algorytm}
- \caption{Pseudokod prezentujący jakiś bezsensowny algorytm}
- \label{tboi:alg}
- \begin{algorithmic}[1]
-\STATE \textbf{program} FancyProgram \{
-
-\STATE \textbf{function} superFunkcja(List listA) \{
-
-\FORALL{element :~listA.getElements()}
-\STATE int result = storeElement(element);
-\IF{result == SUCCESS}
-\STATE double number = result*element;
-\ELSIF{result == FAILURE}
-\STATE double number = result/element;
-\ENDIF
-\ENDFOR
-\STATE \}
-
-\STATE input List elements;
-\STATE output number;
-
-\STATE superFunkcja(elements);
-\RETURN number;
-\STATE \}
- \end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
- \floatname{algorithm}{Algorytm}
- \caption{Algorytm Levenshteina}
- \label{tboi:alg_leven}
-%  \begin{algorithmic}[1]
-\begin{enumerate}
- \item Niech $n = \textit{długość}(s)$ a~$m = \textit{długość}(t)$.
- \item Jeżeli $n == 0$ zwróć m~i zakończ działanie.
- \item Jeżeli $m == 0$ zwróć n~i zakończ działanie.
- \item Utwórz macierz $d$ o~$m+1$ wierszach indeksowanych od $0$ do $m$ oraz $n+1$ kolumnach indeksowanych od $0$ do $n$, pierwszy wiersz zainicjuj wartościami od $0$ do $n$ a~pierwszą kolumnę od $0$ do $m$.
- \item Porównaj każdy znak pierwszego ciągu, indeksowany za pomocą $i$, z~każdym znakiem drugiego ciągu, indeksowanym za pomocą $j$. Dla każdego porównania:
-\begin{enumerate}
- \item jeżeli $s[i]$ jest identyczne z~$t[j]$, $koszt = 0$, w~przeciwnym wypadku $koszt = 1$,
- \item ustaw wartość komórki $d[i,j]$ macierzy na wartość minimalną spośród:
-\begin{itemize}
- \item $d[i-1,j] +~1$,
- \item $d[i,j-1] +~1$,
- \item $d[i-1,j-1] +~koszt$.
-\end{itemize}
-\end{enumerate}
- \item Odczytaj odległość $dist_{lev}(s,t)$ z~komórki $d[n,m]$.
-\end{enumerate}
-%\end{algorithmic}
-\end{algorithm}
-
-Podobnie jak w przypadku rysunków, algorytmy są automatycznie rozlokowywane w tekście przez system Latex.
 
 
-\section{Tymczasowa zmiana rozmiaru strony}
+\section{Podgląd listy instruktorów}
 
-Czasami zachodzi konieczność chwilowej zmiany rozmiaru strony, by np.\ udało się zmieścić jedną dodatkową linijkę tekstu. Możemy to wykonać za pomocą polecenia \textbf{enlargethispage\{\}}, gdzie jako parametr podajemy rozmiar oraz jednostkę. Należy pamiętać, że polecenie to musi zostać wydane odpowiednio wcześniej, by Latex zdążył zastosować nowy rozmiar strony. Najlepiej by te polecenie było bezpośrednio przed nową stroną, jednak zazwyczaj jest to kwestia poeksperymentowania. Wartość przekazana jako parametr może być także ujemna. Przykładowo strona zawierająca rozdział~\ref{listingi} została w niniejszym dokumencie pomniejszona o 5 cm wymuszając przeniesienie początku rozdziału~\ref{algorytmy} na następną stronę.
+Na ekranie z listą instruktorów pracujących w ośrodku, każdy element klikalny zawiera pełną nazwę instruktora.
 
-Strona zawierająca rozdział~\ref{rysunki} powiększono o~20~punktów, co pozwoliło uniknąć samotnej, pojedynczej linii tekstu kończącego akapit (tzw.\ wdowy) na następnej stronie. Takie drobne modyfikacje rozmiaru strony zazwyczaj są niezauważalne dla czytelnika a poprawiają ogólny układ dokumentu.
+Widnieje na nim również wyszukiwarka działająca w sposób analogiczny do przedstawionego w części dotyczącej przeszukiwania placów.
 
-\section{Wpisy bibliograficzne}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{screenshots/android/lista_instruktorow.png}
+\caption{Lista instruktorów}
+\label{fig:Lista_instruktorow_mobile}
+\end{figure}
 
-Wpisy bibliograficzne przechowujemy w odrębnym pliku z rozszerzeniem\ .bib. Przykładowy plik został dołączony do tego dokumentu. Do pliku takiego należy dodawać odpowiedni sformatowane wpisy. Latex automatycznie posortuje je po nazwiskach autorów oraz do finalnego dokumentu dołączy tylko te wpisy,które posiadają odwołania w tekście! Można więc stworzyć kompletną bazę publikacji, a Latex użyje tylko to co potrzeba. Dodatkowo, dzięki użyciu pakietu \textbf{natbib} z parametrem \textbf{sort} (patrz preambuła dokumentu), numerki w odwołaniach również zostaną posortowane, niezależnie od kolejności podania odwołań. Przykład podano w rozdziale~\ref{podzial}.
+Wybranie jednego z elementu listy powoduje wyświetlenie ekranu zawierającego akcje związane z kontaktem do wybranego instruktora, co ilustruje rysunek \ref{fig:Instruktor_mobile}.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.4\textwidth]{screenshots/android/widok_szczegolowy_instruktora.png}
+\caption{Widok szczegółowy wybranego instruktora}
+\label{fig:Instruktor_mobile}
+\end{figure}
+
+Kliknięcie na konkretny przycisk powoduje wykonanie wybranej akcji z poziomu wbudowanych funkcji telefonu.
+
+Możliwe jest wybranie numeru do przeglądanego instruktora, wysłanie wiadomości SMS lub napisanie E-maila.
+
+\newpage
+\section{Ustawienia}
+
+Ekran ustawień umożliwia wylogowanie użytkownika.
+
+Wyświetla również pełną nazwę zalogowanego instruktora, która zostaął skonfigurowana w panelu zarządzania.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{screenshots/android/ustawienia.png}
+\caption{Ekran ustawień - możliwość wylogowania}
+\label{fig:Ustawienia_mobile}
+\end{figure}
+
+Wylogowanie powoduje wyczyszczenie całej pamięci podręcznej, więc staje się również pomocne w przypadku zmiany adresu serwera, z którym aplikacja się komunikuje. Po wylogowaniu należy od nowa wprowadzić zarówno adres serwera, jak i dane do logowania.
+
+W przyszłości ma się tu znaleźć również możliwość zmiany hasła i wymuszenia aktualizacji.
+
+
+\chapter{Podsumowanie i wnioski}
+
+W niniejszej pracy został przedstawiony opis stworzonego systemu wspomagającego pracę instruktorów nauki jazdy.
+
+Celem pracy było stworzenie aplikacji mobilnej na urządzenia z systemem Android, która umożliwia komunikowanie się z innymi tego typu klientami przez scentralizowany serwer napisany w technologii Node.js.
+
+Napisana w ramach pracy aplikacja umożliwia wymianę informacji o stanach zajętości placów wprowadzonych do systemu pomiędzy klientami, ich odległości względem położenia użytkownika oraz możliwość skontaktowania się z innymi instruktorami przy pomocy wbudowanych funkcji urządzenia.
+
+W pracy została przedstawiona architektura systemu, sposób komunikacji wewnątrz niego, instrukcja uruchomienia aplikacji oraz jej używania.
+
+Autor napotkał na wiele trudności, które udało mu się rozwiązać, co zapewniło mu sporą dawkę doświadczenia. Praca pozwoliła autorowi na nauczenie się i zdobycie nowych umiejętności dotyczących tworzenia hybrydowych aplikacji mobilnych w technologiach webowych oraz pisania serwerów API dla nich.
+
+Aplikacja może być w przyszłości rozwijana i wzbogacana o nowe funkcjonalności. Istnieje wiele pomysłów na dalszy rozwój i z pewnością będzie ona nadal rozwijana. Docelowo aplikacja ma stać się konkurencyjnym oprogramowaniem do zarządzania m.in. harmonogramami lekcji nauki jazdy, postępów w nauczaniu konkretnych kursantów i przydzielaniem wyposażenia instruktorów.
 
 \backmatter
 
@@ -816,10 +833,14 @@ Wpisy bibliograficzne przechowujemy w odrębnym pliku z rozszerzeniem\ .bib. Prz
 % lista tabel
 %\listoftables
 % lista algorytmów
-\listofalgorithms
+%\listofalgorithms
 
 % rodzaj bibliografii
+\nocite{*}
 \bibliographystyle{plain}
+\renewcommand{\bibname}{Literatura}
 % plik z wpisami bibliograficznymi
 \bibliography{bibliografia}
+
+
 \end{document}
