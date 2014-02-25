@@ -30,8 +30,8 @@
 \contentsline {chapter}{\numberline {6}Klient dla systemu Android - korzystanie}{25}
 \contentsline {section}{\numberline {6.1}Przypadki u\IeC {\.z}ycia}{25}
 \contentsline {section}{\numberline {6.2}Logowanie}{26}
-\contentsline {section}{\numberline {6.3}Podgl\IeC {\k a}d listy plac\IeC {\'o}w}{26}
-\contentsline {subsection}{\numberline {6.3.1}Zajmowanie i zwalnianie placu}{28}
-\contentsline {section}{\numberline {6.4}Podgl\IeC {\k a}d listy instruktor\IeC {\'o}w}{30}
-\contentsline {section}{\numberline {6.5}Ustawienia}{32}
-\contentsline {chapter}{\numberline {7}Podsumowanie i wnioski}{33}
+\contentsline {section}{\numberline {6.3}Podgl\IeC {\k a}d listy plac\IeC {\'o}w}{27}
+\contentsline {subsection}{\numberline {6.3.1}Zajmowanie i zwalnianie placu}{29}
+\contentsline {section}{\numberline {6.4}Podgl\IeC {\k a}d listy instruktor\IeC {\'o}w}{31}
+\contentsline {section}{\numberline {6.5}Ustawienia}{33}
+\contentsline {chapter}{\numberline {7}Podsumowanie i wnioski}{35}
