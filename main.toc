@@ -8,10 +8,10 @@
 \contentsline {chapter}{\numberline {2}Wykorzystywane technologie}{3}
 \contentsline {section}{\numberline {2.1}JavaScript}{3}
 \contentsline {section}{\numberline {2.2}Node.js}{4}
-\contentsline {section}{\numberline {2.3}Socket.IO}{4}
+\contentsline {section}{\numberline {2.3}Socket.IO}{5}
 \contentsline {section}{\numberline {2.4}MongoDB}{5}
 \contentsline {subsubsection}{Mongoose}{5}
-\contentsline {section}{\numberline {2.5}PhoneGap}{5}
+\contentsline {section}{\numberline {2.5}PhoneGap}{6}
 \contentsline {chapter}{\numberline {3}Architektura systemu}{7}
 \contentsline {section}{\numberline {3.1}Aplikacja serwerowa}{7}
 \contentsline {subsubsection}{Routing aplikacji}{7}
@@ -22,7 +22,7 @@
 \contentsline {chapter}{\numberline {4}Uruchomienie aplikacji}{15}
 \contentsline {section}{\numberline {4.1}Aplikacja serwerowa}{15}
 \contentsline {subsubsection}{Konfiguracja bazy danych}{16}
-\contentsline {section}{\numberline {4.2}Aplikacja mobilna na platform\IeC {\k e} Android}{16}
+\contentsline {section}{\numberline {4.2}Aplikacja kliencka na platform\IeC {\k e} Android}{16}
 \contentsline {subsubsection}{Konfiguracja \IeC {\'s}cie\IeC {\.z}ki serwera w aplikacji mobilnej}{16}
 \contentsline {chapter}{\numberline {5}Panel zarz\IeC {\k a}dzania - konfiguracja}{19}
 \contentsline {section}{\numberline {5.1}Zarz\IeC {\k a}dzanie list\IeC {\k a} plac\IeC {\'o}w manewrowych}{20}

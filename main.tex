@@ -202,9 +202,9 @@ Niniejsza praca opisuje projekt i wykonanie mobilnego systemu komunikacji przezn
 
 \section{Założenia projektu}
 
-Głównym założeniem projektu było stworzenie prostej aplikacji mobilnej, która będzie przyjazna dla użytkowników, a jednocześnie nadal będzie spełniała swoje zadanie - ułatwiała komunikacji pomiędzy instruktorami Ośrodków Szkolenia Kierowców w celu zmniejszenia kolizji zajętości placów manewrowych.
+Głównym założeniem projektu było stworzenie prostej aplikacji mobilnej, która będzie przyjazna dla użytkowników, a jednocześnie nadal będzie spełniała swoje zadanie -- ułatwiała komunikację pomiędzy instruktorami Ośrodków Szkolenia Kierowców w celu zminimalizowania kolizji zajętości placów manewrowych.
 
-Kolejnym założeniem było wykorzystanie języka JavaScript w każdej płaszczyźnie aplikacji, zarówno klienta, jak i serwera oraz użycie nierelacyjnej bazy danych, która będzie przechowywała dane o strukturze zbliżonej do struktury obiektów tego języka.
+Kolejnym założeniem było wykorzystanie języka JavaScript w każdej płaszczyźnie aplikacji, zarówno klienta, jak i serwera oraz użycie nierelacyjnej bazy danych, która będzie przechowywała dane o strukturze zbliżonej do struktury obiektów tego języka, co wpłynie pozytywnie na wydajność.
 
 
 \section{Cel pracy}
@@ -230,18 +230,18 @@ Projekt praktyczny, stworzony dla celów niniejszej pracy jest znaczną części
 
 JavaScript jest prototypowym obiektowym językiem programowania. Jest to język Internetu, ze względu na to, że jego kod potrafi uruchomić prawie każda przeglądarka internetowa. Po ciężkim okresie, kiedy to został ogólnie przyjęty jako zabawka umożliwiająca tworzenie tzw. wodotrysków na stronach WWW, rozrósł znacząco i dzisiaj jest jednym z najpopularniejszych, a na pewno najsłynniejszym spośród internetowych języków programowania.
 
-Dzisiejszą ,,Dobę Internetu'' pełną technologii AJAX, rozbudowanych klienckich aplikacji internetowych przypominających desktopowe m.in. czytników RSS, aplikacji biurowych, klientów pocztowych, interaktywnych map, programów do obróbki grafiki i wideo etc. do historii odeszły długotrwałe wywołania stron wykonywane przy każdym wejściu użytkownika  w interakcję z przeglądarką. \cite{stefanov2012javascript}\cite{stefanov2010javascript}\cite{maccaw2012javascript} To wszystko możemy zawdzięczać głównie dzięki JavaScriptowi.
+W dzisiejszej ,,Dobie Internetu'' pełnej technologii AJAX (ang. Asynchronous JavaScript and XML), rozbudowanych klienckich aplikacji internetowych przypominających desktopowe m.in. czytników RSS, aplikacji biurowych i biznesowych, klientów pocztowych, interaktywnych map, programów do obróbki grafiki i wideo etc. do historii odeszły długotrwałe wywołania stron wykonywane przy każdym wejściu użytkownika  w interakcję z przeglądarką. \cite{stefanov2012javascript}\cite{stefanov2010javascript}\cite{maccaw2012javascript} To wszystko możemy zawdzięczać głównie dzięki JavaScriptowi.
 
-Początkowe wersje interpreterów JavaScript zostały osadzone w jednych z pierwszych wersji przeglądarek Netscape i Internet Explorer. Ta kliencka wersja JavaScriptu pozwala na umieszczanie wykonywalnej zawartości w stronach internetowych, co pozwala na budowanie interakcji z użytkownikiem, to coś więcej niż statyczne strony WWW. Skrypty języka JavaScript odpowiedzialne są za część zachowawczą stron, kiedy to HTML (ang. HyperText Markup Language) opisuje zawartość i strukturę DOM (ang. Document Object Model) oraz treść, a CSS (ang. Cascading Style Sheets) opisuje wygląd tych elementów.
+Początkowe wersje interpreterów JavaScript zostały osadzone w jednych z pierwszych wersji przeglądarek Netscape i Internet Explorer. Ta kliencka wersja JavaScriptu pozwala na umieszczanie wykonywalnej zawartości w stronach internetowych, co pozwala na budowanie interakcji z użytkownikiem, to coś więcej niż statyczne strony WWW. \cite{flanagan2002javascript} Skrypty języka JavaScript odpowiedzialne są za część zachowawczą stron, kiedy to HTML (ang. HyperText Markup Language) opisuje zawartość i strukturę DOM (ang. Document Object Model) oraz treść, a CSS (ang. Cascading Style Sheets) opisuje wygląd tych elementów.
 
-JavaScript jest otwartym standardem, ale standaryzacją tego języka zajmuje się ECMA International (ang. ang. European Computer Manufacturers Association), która na jego podstawie wydała standard języka skryptowego o nazwie ECMAScript, którego już niedługo szósta wersja wprowadzić ma nowe mechanizmy obiektowości, takie jak np. pełnowymiarowe dziedziczenie za pomocą klas (które dzisiaj jest realizowane przez prototypowanie obiektów), modularyzację i hermetyzację (które dzisiaj są realizowane przez zewnętrzne biblioteki wprowadzające tego typu abstrakcje), a także wiele innych usprawnień, które zapewne przyciągną jeszcze większe rzesze programistów na całym świecie.
+JavaScript jest otwartym standardem, ale standaryzacją tego języka zajmuje się ECMA International\footnote{http://www.ecma-international.org/} (ang. ang. European Computer Manufacturers Association), która na jego podstawie wydała standard języka skryptowego o nazwie ECMAScript, którego już niedługo szósta wersja wprowadzić ma nowe mechanizmy obiektowości, takie jak np. pełnowymiarowe dziedziczenie za pomocą klas (które dzisiaj jest realizowane przez prototypowanie obiektów), modularyzację i hermetyzację (które dzisiaj są realizowane przez zewnętrzne biblioteki wprowadzające tego typu abstrakcje), a także wiele innych usprawnień, które zapewne przyciągną jeszcze większe rzesze programistów na całym świecie.
 
 Obecnie przeglądarki WWW to nie jedyne interpretery w obrębie których możliwe jest uruchomienie kodu JavaScript. Można tworzyć kod do zastosowań po stronie serwera WWW (m.in .NET lub Node.js), skrypty i aplikacje wiersza poleceń CLI (ang. Command Line Interface) \cite{stefanov2012javascript}, aplikacje desktopowe (Node-webkit, Alchemium), aplikacje dla urządzeń przenośnych (m.in Sencha Touch, PhoneGap), aplikacje dla Smart TV (m.in. Mautilus), sterowanie mikrokomputerami takimi jak Raspberry PI (np. pijs.io) i Arduino (np. Johnny-Five, noduino), systemy operacyjne (Firefox OS, Chrome~OS) rozszerzenia aplikacji takich jak Adobe Photoshop, Google Chrome, Mozilla Firefox.
 
 
 \section{Node.js}
 
-Node.js jest stosunkowo nową platformą deweloperską stworzoną przez Ryana Dahla, pozwalającą programistom JavaScript na tworzenie kodu serwerowego o~wysokiej wydajności. \cite{means2012node} \cite{powers2012learning}
+Node.js\footnote{http://nodejs.org/} jest stosunkowo nową platformą deweloperską stworzoną przez Ryana Dahla, pozwalającą programistom JavaScript na tworzenie kodu serwerowego o~wysokiej wydajności. \cite{means2012node} \cite{powers2012learning}
 
 Dokładniej rzecz ujmując jest to silnik Google V8 z projektu Chromium (Google Chrome) opakowany w taki sposób, aby można było go wykorzystywać jako niezależny interpreter z możliwościami podobnymi do~np.~Ruby, Pythona, PHP itd.
 
@@ -254,31 +254,31 @@ Kolejnym atutem jest możliwość rozwijania kodu serwerowego i klienckiego w je
 
 \section{Socket.IO}
 
-HTML5 WebSocket to technologia zapewniająca kanał komunikacji pomiędzy przeglądarką internetową, a serwerem internetowym w obu kierunkach za pomocą jednego gniazda TCP.
+HTML5 WebSocket to technologia zapewniająca kanał komunikacji pomiędzy przeglądarką internetową, a serwerem internetowym w obu kierunkach za pomocą jednego połączenia TCP.
 
-Wszystkie nowoczesne przeglądarki wspierają już tą technologię, a Socket.IO jest biblioteką, która pozwala na stosunkowo szybkie tworzenie aplikacji czasu rzeczywistego w przeglądarkach i~aplikacjach mobilnych za pomocą ujednoliconego interfejsu, zacierając przy tym różnice pomiędzy różnymi mechanizmami transportu i interpretacjami twórców oprogramowania.
+Wszystkie nowoczesne przeglądarki wspierają już tą technologię, a Socket.IO\footnote{http://socket.io} jest biblioteką, która pozwala na stosunkowo szybkie tworzenie aplikacji czasu rzeczywistego w przeglądarkach i~aplikacjach mobilnych za pomocą ujednoliconego interfejsu, zacierając przy tym różnice pomiędzy różnymi mechanizmami transportu i interpretacjami twórców oprogramowania.
 
-Węzeł komunikacji w przypadku WebSockets jest w przeciwieństwie do AJAX otwarty na stałe pomiędzy klientem, a serwerem. Jednak dane pomiędzy socketami są przesyłane poprzez HTTP jako obiekty XHR (XMLHttpRequest) podobnie jak w przypadku AJAX'a. \cite{croucher2012node}
+Węzeł komunikacji w przypadku WebSockets jest w przeciwieństwie do AJAX otwarty na stałe pomiędzy klientem, a serwerem. Jednak dane pomiędzy socketami są przesyłane poprzez HTTP jako obiekty XHR (XMLHttpRequest) podobnie jak w przypadku AJAX. \cite{croucher2012node}
 
 
 \section{MongoDB}
 
-MongoDB jest nierelacyjną bazą danych (NoSQL), która przechowuje dane w formacie klucz-wartość o postaci dokumentów JSON, takim samym jak obiekty JavaScript, co sprawia, że nie ma potrzeby konwersji danych podczas odczytu i zapisu danych przez Node.js, dzięki temu wymiana danych jest szybsza niż w przypadku nierelacyjnych danych a komunikacja nie blokuje systemów wejścia/wyjścia.
+MongoDB\footnote{http://www.mongodb.org/} jest nierelacyjną bazą danych (NoSQL - ang. Not only SQL), która przechowuje dane w formacie BSON, czyli strukturze klucz-wartość podobnej do postaci JSON, czyli notacji opisującej obiekty JavaScript, co sprawia, że nie ma potrzeby konwersji podczas odczytu i zapisu danych przez Node.js. Dzięki temu wymiana danych jest szybsza niż w przypadku zapytań do DBMS (ang. Database Management System) relacyjnych baz danych, a komunikacja nie blokuje systemu wejścia/wyjścia.
 
 Dokumenty takie nie wymagają określonej struktury i dane w nich nie są sztywno powiązane relacjami, dzięki czemu są wysoce skalowalne i pozwalają na szybszy rozwój aplikacji dzięki skoncentrowaniu na celu, a nie środkach do jego osiągnięcia.\cite{chodorow2013mongodb}
 
 \subsubsection{Mongoose}
 
-Istnieje wiele sterowników do MongoDB dla różnych języków programowania. W niniejszej pracy został użyty pakiet Mongoose.js, narzędzie typu ODM (Object Document Mapping), które dba o~schemat modelu danych, jego walidację i zgodność typów dla konkretnych pól, a także abstrahuje relacyjne powiązania między kolekcjami bazy danych, jeśli zachodzi taka potrzeba.
+Istnieje wiele sterowników do MongoDB dla różnych języków programowania. W niniejszej pracy został użyty pakiet Mongoose.js\footnote{http://mongoosejs.com/}, narzędzie typu ODM (Object Document Mapping), które dba o~schemat modelu danych, jego walidację i zgodność typów dla konkretnych pól, a także abstrahuje relacyjne powiązania między kolekcjami bazy danych, jeśli zachodzi taka potrzeba.
 
 
 \section{PhoneGap}
 
 PhoneGap\footnote{http://phonegap.com} jest frameworkiem do budowania aplikacji mobilnych o otwartym kodzie źródłowym stworzonym przez firmę Nitobi, z czasem odsprzedanym do Adobe Systems\footnote{http://www.adobe.com/pl/}, która to nadal czynnie rozwija produkt.
 
-Pozwala na tworzenie aplikacji webowych w technologiach HTML, CSS i Javascript, które po kompilacji za pośrednictwem PhoneGap umożliwiają uruchamianie ich jako natywnych aplikacji wybranego mobilnego systemu operacyjnego. \cite{stark2013android}
+Pozwala on na tworzenie aplikacji webowych w technologiach HTML, CSS i Javascript, które po kompilacji za pośrednictwem PhoneGap umożliwiają uruchamianie ich jako natywnych aplikacji wybranego mobilnego systemu operacyjnego. \cite{stark2013android}
 
-Pisząc jeden, uniwersalny kod źródłowy aplikacji można uzyskać pliki instalacyjne dla różnych platform mobilnych. W chwili pisania tego tekstu PhoneGap umożliwia kompilację do natywnych aplikacji dla:
+Pisząc jeden, uniwersalny kod źródłowy aplikacji można uzyskać pliki instalacyjne dla różnych platform mobilnych. W chwili pisania tego tekstu PhoneGap umożliwia kompilację do natywnych aplikacji dla systemów:
 \begin{itemize}
 	\item Android
 	\item iOS
@@ -290,7 +290,7 @@ Pisząc jeden, uniwersalny kod źródłowy aplikacji można uzyskać pliki insta
 	\item Bada
 \end{itemize}
 
-Sercem PhoneGap jest otwarty projekt Apeche Cordova, umożliwiający dostęp do niskopoziomowych warstw sprzętowych za pomocą wysokopoziomowych abstrakcji w języku JavaScript. 
+Sercem PhoneGap jest projekt Apache Cordova\footnote{http://projects.apache.org/projects/cordova.html} o otwartym kodzie źródłowym, umożliwiający dostęp do niskopoziomowych warstw sprzętowych za pomocą wysokopoziomowych abstrakcji w języku JavaScript. 
 
 Jaśniej mówiąc, istnieje możliwość wykorzystania m.in. aparatu, akcelerometru, kompasu, odbiornika GPS, głośników i mikrofonu urządzania, na którym uruchamiana jest aplikacja, a także możliwy staje się dostęp do systemu plików z możliwością odczytu i zapisu, ustawień karty sieciowej urządzenia, listy kontaktów oraz emitowania zdarzeń takich jak powiadomienia zarówno dźwiękowych, jak i wibracyjnych.
 
@@ -403,7 +403,7 @@ Analizując powyższy kod, można stwierdzić, że np. żądanie typu \texttt{GE
 
 Baza danych MongoDB zawiera dwie główne kolekcje:
 \begin{itemize}
-\item{Inctructors}
+\item{Instructors}
 \item{Places}
 \end{itemize}
 
@@ -482,7 +482,7 @@ Edycji użytkowników można dokonywać w obrębie \texttt{/instructors} -- jedn
 
 \section{Klient mobilny}
 
-Można rozróżnić trzy sposoby wytwarzania aplikacji mobilnych, efektem których można wymienić 3 typy:
+Możemy rozróżnić trzy typy aplikacji mobilnych w zależności od sposobu wytwarzania oprogramowania. Są to:
 \begin{itemize}
 \item aplikacje natywne,
 \item aplikacje webowe,
@@ -490,14 +490,14 @@ Można rozróżnić trzy sposoby wytwarzania aplikacji mobilnych, efektem który
 \end{itemize}
 
 \subsubsection*{Aplikacje natywne}
-To oprogramowanie tworzone najczęściej w języku programowania takim jak np.~Java, Objective-C czy C\# w zależności od platformy. Są to aplikacje pisane pod konkretny system operacyjny i mogą korzystać ze wszystkich udogodnień i funkcji sprzętowych, jakie umożliwia dane urządzenie oraz ingerować w zachowania systemu i rozszerzać jego możliwości. Są bardzo szybkie i płynne, ich interfejs może wykorzystywać systemowe UI (np. Metro w Windows Phone, Holo w Androidzie), dzięki czemu ujednolicają się doskonale z systemem, co pozwala lepiej trafić w przyzwyczajenia użytkowników. Ich największą wadą jest koszt produkcji, ponieważ, aby dotrzeć do szerszego grona odbiorców, na każdy mobilny system operacyjny musi być przygotowana oddzielna aplikacja.
+To oprogramowanie tworzone najczęściej w języku programowania takim jak np.~Java, Objective-C czy C\# w zależności od platformy mobilnej. Są to aplikacje pisane pod konkretny system operacyjny i mogą korzystać ze wszystkich udogodnień i funkcji sprzętowych, jakie umożliwia dane urządzenie oraz ingerować w zachowania systemu i rozszerzać jego możliwości. Tego typu aplikacje są bardzo szybkie i płynne, ich interfejs może wykorzystywać systemowe UI (np. Metro w Windows Phone, Holo w~Androidzie), dzięki czemu ujednolicają się doskonale z systemem, co pozwala lepiej trafić w przyzwyczajenia użytkowników. Ich największą wadą jest koszt produkcji, ponieważ, aby dotrzeć do szerszego grona odbiorców, na każdy mobilny system operacyjny musi być przygotowana oddzielna aplikacja.
 
 \subsubsection*{Aplikacje webowe}
 To nic innego jak strony internetowe zbudowane w nowych technologiach webowych, które przypominają wyglądem aplikacje mobilne. Uruchamiane są w przeglądarce internetowej i przez to wymagają ciągłego połączenia z Internetem oraz niemożliwe jest wykorzystanie w nich funkcji sprzętowych urządzenia, jakimi są m.in. aparat, kamera, GPS, żyroskop, akcelerometr. Największą i chyba jedyną zaletą tego typu aplikacji jest dostępność. Nie trzeba nic instalować, wystarczy jedynie wpisać adres internetowy aplikacji w przeglądarce internetowej, aby ją uruchomić. Aplikacje takie są uniwersalne, ponieważ maszyną uruchomieniową jest przeglądarka, więc wystarczy jeden język programowania (najczęściej jest to JavaScript), aby stworzyć uniwersalną aplikację działającą na wszystkich platformach. Co sprawia, że tego typu oprogramowanie jest stosunkowo tanie w porównaniu z aplikacjami natywnymi, gdzie nakład pracy jest o wiele większy.
 
 \subsubsection*{Aplikacje hybrydowe}
-Czyli takie jak opisywana w niniejszej pracy. Jak sama nazwa wskazuje, jest to połączenie aplikacji natywnych i webowych. Użytkownicy często nie odróżniają ich od aplikacji natywnych, jednak w sporej części budowane są w technologiach webowych takich jak HTML5, CSS3 i JavaScript, więc możliwe jest stworzenie jednej wersji oprogramowania, które działać będzie na wielu platformach. Hybrydy, tak samo jak aplikacje mobilne instalowane są w systemie i dystrybuowane w sklepach z aplikacjami takimi jak App Store czy Google Play (dawniej Android Market).
-Jako, że po części napisane są w języku natywnym, a po części w webowym (wspomniane wcześniej HTML 5 czy CSS3), mają dostęp do pewnych funkcji urządzeń, na których są uruchamiane. Można wykorzystać dobrodziejstwa m.in. akcelerometru, GPS, mikrofonu, kamery, czy zapisywać i odczytywać dane z pamięci urządzenia.
+Czyli takie jak opisywana w niniejszej pracy. Jak sama nazwa wskazuje, jest to połączenie aplikacji natywnych i webowych. Użytkownicy często nie odróżniają ich od aplikacji natywnych, jednak w sporej części budowane są w technologiach webowych takich jak HTML5, CSS3 i JavaScript, dzięki czemu możliwe jest stworzenie jednej wersji oprogramowania, które działać będzie na wielu platformach. Hybrydy, tak samo jak aplikacje mobilne instalowane są w systemie i dystrybuowane w sklepach z aplikacjami takimi jak App Store czy Google Play (dawniej Android Market).
+Jako, że po części napisane są w języku natywnym, a po części w webowym (wspomniane wcześniej HTML5 czy CSS3), mają dostęp do pewnych funkcji urządzeń, na których są uruchamiane. Można wykorzystać dobrodziejstwa m.in. akcelerometru, GPS, mikrofonu, kamery, czy zapisywać i odczytywać dane z pamięci urządzenia.
 Aplikacje hybrydowe umożliwiają osiągnięcie idealnej proporcji pomiędzy jakością i możliwościami aplikacji natywnych, a niskim kosztem wytwarzania aplikacji webowych.
 
 
@@ -548,13 +548,13 @@ io.sockets.on('connection', function (socket) {
 
 \section{Aplikacja serwerowa}
 
-Do uruchomienia aplikacji potrzebny jest interpreter Node.js. Można go pobrać ze strony projektu i zainstalować w systemie. Dostępne są dla wszystkich popularnych systemów operacyjnych. I uruchomić skrypt poleceniem \texttt{node app.js} w katalogu głównym projektu za pomocą wiersza poleceń.
+Do uruchomienia aplikacji potrzebny jest interpreter Node.js. Można go pobrać ze strony projektu\footnote{http://nodejs.org/} i zainstalować w systemie (pliki instalacyjne dostępne są dla wszystkich popularnych systemów operacyjnych) i uruchomić skrypt poleceniem \texttt{node app.js} w katalogu głównym projektu za pomocą wiersza poleceń.
 Od momentu uruchomienia aplikacji, serwer będzie nasłuchiwał na określonym w konfiguracji porcie -- domyślnie jest to port \texttt{3000}.
 
-Innym sposobem uruchomienia jest możliwość wykorzystania jednego z dostawców usług hostingowych typu PaaS (ang. Platform as a Service) takich jak np. AppFog \footnote{http://www.appfog.com/}, Heroku \footnote{https://www.heroku.com/}, czy OpenShift \footnote{https://www.openshift.com/} i uruchomienia aplikacji w chmurze jako usługa Node.js. Ta metoda jest uzależniona od wybranego usługodawcy i więcej informacji można uzyskać w dokumentacji dotyczącej tegoż hostingu.
+Innym sposobem uruchomienia jest możliwość wykorzystania jednego z dostawców usług hostingowych typu PaaS (ang. Platform as a Service) takich jak np. \mbox{AppFog}\footnote{http://www.appfog.com/}, Heroku\footnote{https://www.heroku.com/}, czy OpenShift\footnote{https://www.openshift.com/} i wystartowania aplikacji w chmurze jako usługa Node.js. Ta metoda jest uzależniona od wybranego usługodawcy i więcej informacji można uzyskać w dokumentacji dotyczącej tegoż hostingu.
 
 Oprócz działającego interpretera Node.js, który będzie w stanie uruchomić aplikację, potrzebna jest jeszcze baza danych MongoDB.
-Proces instalacji tego oprogramowania dla wybranych systemów operacyjnych jest szczegółowo opisany na stronie projektu \footnote{http://www.mongodb.org/}. Gdzie są też dostępne binaria instalacyjne dla najpopularniejszych systemów operacyjnych.
+Proces instalacji tego oprogramowania dla wybranych systemów operacyjnych jest szczegółowo opisany na stronie projektu\footnote{http://www.mongodb.org/}. Gdzie są też dostępne binaria instalacyjne dla najpopularniejszych systemów operacyjnych.
 
 Najprostszym sposobem jest jednak skorzystanie z usług MongoLab \footnote{https://mongolab.com} -- platformy działającej w chmurze, umożliwiającej uruchomienie własnej instancji bazy danych MongoDB o rozmiarach do 500 MB za darmo.
 Po rejestracji i stworzeniu pierwszej bazy danych, otrzymamy dane potrzebne do połączenia z bazą.
@@ -578,7 +578,7 @@ Listing \ref{lst:dbconfig} zawiera domyślną zawartość pliku konfiguracyjnego
 \end{lstlisting}
 
 
-\section{Aplikacja mobilna na platformę Android}
+\section{Aplikacja kliencka na platformę Android}
 
 Do uruchomienia klienta mobilnego potrzebny jest smartfon lub tablet z systemem operacyjnym Android oraz plik instalacyjny ze skompilowaną aplikacją.
 
@@ -644,7 +644,7 @@ Przesyłane na serwer zdjęcie placu jest przy okazji zapisu przetwarzane na ci�
 Takie zdjęcie zakodowane w formie tekstowej jest przesyłane wraz z innymi danymi placów do aplikacji mobilnej, która z powrotem potrafi je wyświetlić jako obrazek i przetrzymywać w swojej lokalnej bazie danych.\newline \newline
 
 
-Na rysunku \ref{fig:Lista_placow} przedstawiony jest ekran z listą, na której widoczne jest kilka pierwszych placów wprowadzonych do bazy danych. Wprowadzone dane są wygenerowane losowo przy pomocy biblioteki Faker.js \footnote{https://github.com/marak/Faker.js/}.
+Na rysunku \ref{fig:Lista_placow} przedstawiony jest ekran z listą, na której widoczne jest kilka pierwszych placów wprowadzonych do bazy danych. Wprowadzone dane są wygenerowane losowo przy pomocy biblioteki Faker.js\footnote{https://github.com/marak/Faker.js/}.
 
 \begin{figure}[H]
 \centering
@@ -658,7 +658,7 @@ Plac o nazwie ,,Plac \#23'' na powyższym rysunku jest oznaczony jako zajęty. W
 \newpage
 Rysunek \ref{fig:Edycja_placu} przedstawia widok formularza do edycji danych wybranego placu.
 
-Nie różni się on bardzo od formularza dodawania nowego placu poza tym, że ustawione aktualnie pola są już wypełnione bieżącymi danymi oraz nad częścią dotyczącą wstawiania nowego zdjęcia widnieje podgląd aktualnie wstawionej miniaturki.
+Nie różni się on znacząco od formularza dodawania nowego placu poza tym, że ustawione aktualnie pola są już wypełnione bieżącymi danymi oraz nad częścią dotyczącą wstawiania nowego zdjęcia widnieje podgląd aktualnie wstawionej miniaturki.
 
 Istnieje możliwość zmiany nazwy placu, adresu, współrzędnych i wgrania nowego zdjęcia.
 
@@ -706,7 +706,7 @@ Możliwe do wykonania akcje to:
 
 \chapter{Klient dla systemu Android - korzystanie}
 
-Autor starał się, aby wykonana aplikacja mobilna była tak intuicyjna, jak to tylko możliwe.
+Autor poczynił starania, aby wykonana aplikacja mobilna była tak intuicyjna, jak to tylko możliwe.
 
 Zamysłem było udostępnienie w interfejsie tylko tych funkcji, które są niezbędne do komunikacji pomiędzy instruktorami.
 
@@ -718,16 +718,14 @@ Lista najbliższych placów wraz z informacjami o ich zajętości to minimum jak
 
 Rysunek \ref{fig:Diagram przypadków użycia} wizualizuje akcje możliwe do wykonania przez użytkowników aplikacji.
 
-Akcje logowania oraz zajmowania i zwalniania placu wykonują zapytania do serwera (aktor - System), który podejmuje kolejne działania w celu wymiany danych.
+Akcje logowania oraz zajmowania i zwalniania placu wykonują zapytania do serwera (System), który podejmuje konieczne działania i zwraca odpowiedź do klienta.
 
-
-
-Inne akcje, m.in. wyświetlanie list placów i instruktorów oraz ich szczegółów, a także wylogowanie użytkownika, działają lokalnie. Nie wymieniają żadnych danych z zewnętrznym API.
+Inne akcje, m.in. wyświetlanie list placów i instruktorów oraz ich szczegółów, a także wylogowanie użytkownika, działają lokalnie. Nie wymieniają żadnych danych poprzez zewnętrzne API.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=1\textwidth]{screenshots/uml/usecases.png}
-\caption{Ekran logowania użytkownika}
+\caption{Diagram przypadków użycia}
 \label{fig:Diagram przypadków użycia}
 \end{figure}
 
@@ -753,7 +751,7 @@ Domyślnym widokiem wyświetlonym po pomyślnym zalogowaniu jest lista placów.
 
 Na podstawie położenia GPS lista jest sortowana wg odległości placów. Najbliżej położone punkty znajdują się na początku listy.
 
-Każdy element listy zawiera nazwę placu, jego adres oraz odległość. Do obliczania odległości zostało wykorzystane Google Maps API.
+Każdy element listy zawiera nazwę placu, jego adres oraz odległość. Do obliczania odległości zostało wykorzystane Google Maps API\footnote{https://developers.google.com/maps/documentation/javascript/} wraz z biblioteką pomocniczą o nazwie Gmap3\footnote{http://gmap3.net/}.
 
 Rysunek \ref{fig:Lista_placow_mobile} przedstawia ekran prezentujący listę placów.
 
@@ -778,18 +776,18 @@ Efekt wyszukiwania można zaobserwować na rysunku \ref{fig:Lista_placow-przefil
 
 \subsection{Zajmowanie i zwalnianie placu}
 
-Po wciśnięciu wybranego placu zostaje rozpropagowana w systemie informacja o zajętości tego placu, a użytkownik zostaje przeniesiony na ekranz  widokiem szczegółowym, który przedstawia rysunek \ref{fig:Zajmowany_plac_mobile}.
+Po wciśnięciu wybranego placu zostaje rozpropagowana w systemie informacja o~zajętości tego placu, a użytkownik zostaje przeniesiony na ekran z widokiem szczegółowym, który przedstawia rysunek \ref{fig:Zajmowany_plac_mobile}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{screenshots/android/szczegoly_placu.png}
+\includegraphics[width=0.65\textwidth]{screenshots/android/szczegoly_placu.png}
 \caption{Widok szczegółowy zajmowanego placu}
 \label{fig:Zajmowany_plac_mobile}
 \end{figure}
 
 Widoczna jest interaktywna mapa z położeniem placu, zaimplementowana z wykorzystaniem Google Maps, którą można dowolnie przybliżać, oddalać, przesuwać oraz przełączyć się na widok satelitarny lub panoramiczny.
 
-Przycisk ,,Zwolnij plac'' pozwala wrócić do poprzedniego ekranu jednocześnie wysyłając do serwera informację o zwolnieniu placu.
+Przycisk ,,Zwolnij plac'' pozwala wrócić do poprzedniego ekranu jednocześnie wysyłając do serwera informację o zwolnieniu placu. Obsługa przycisku sprzętowego ,,back'' służącego do cofania w systemie Android, została dostosowana tak, aby wykonywać tę samą metodę.
 
 
 
@@ -825,7 +823,7 @@ Możliwe jest wybranie numeru do przeglądanego instruktora, wysłanie wiadomoś
 
 Ekran ustawień umożliwia wylogowanie użytkownika.
 
-Wyświetla również pełną nazwę zalogowanego instruktora, która zostaął skonfigurowana w panelu zarządzania.
+Wyświetla również pełną nazwę zalogowanego instruktora, która została skonfigurowana w panelu zarządzania.
 
 \begin{figure}[H]
 \centering
@@ -843,15 +841,17 @@ W przyszłości ma się tu znaleźć również możliwość zmiany hasła i wymu
 
 W niniejszej pracy został przedstawiony opis stworzonego systemu wspomagającego pracę instruktorów nauki jazdy.
 
-Celem pracy było stworzenie aplikacji mobilnej na urządzenia z systemem Android, która umożliwia komunikowanie się z innymi tego typu klientami przez scentralizowany serwer napisany w technologii Node.js.
+Celem pracy było stworzenie aplikacji mobilnej na urządzenia z systemem Android, która umożliwia komunikowanie się z innymi, takimi samymi klientami przez scentralizowany serwer napisany w technologii Node.js.
 
-Cel udało się osiągnąć. Zrealizowana w ramach pracy aplikacja umożliwia wymianę informacji o stanach zajętości placów wprowadzonych do systemu pomiędzy klientami, ich odległości względem położenia użytkownika oraz możliwość skontaktowania się z innymi instruktorami przy pomocy wbudowanych funkcji urządzenia.
+Cel udało się osiągnąć. Zrealizowana w ramach pracy aplikacja umożliwia wymianę informacji o stanach zajętości placów wprowadzonych do systemu pomiędzy klientami, obliczania i wyświetlania ich odległości względem położenia użytkownika oraz możliwość skontaktowania się z innymi instruktorami przy pomocy wbudowanych funkcji urządzenia. 
 
-W pracy została przedstawiona architektura systemu, sposób komunikacji wewnątrz niego, instrukcja uruchomienia aplikacji oraz jej używania.
+Jedynym językiem programowania użytym do stworzenia logiki aplikacji jest \mbox{JavaScript}, a nierelacyjna baza danych MongoDB przetrzymuje dane w formacie przyjaznym dla tego języka. Wpłynęło to pozytywnie na wydajność. Można powiedzieć, że aplikacja działa w czasie rzeczywistym, co potwierdzają testy wykonywane na telefonach Samsung Galaxy S Plus, Samsung Galaxy S II, LG Nexus 4, emulatorze AVD (ang. Android Virtual Device) wbudowanym w SDK (ang. Software Developer Kit) Androida oraz wirtualnej maszynie uruchamiającej system Android przy pomocy narzędzia Genymotion\footnote{http://www.genymotion.com/}.
 
-Autor napotkał na wiele trudności, które udało mu się rozwiązać, co zapewniło mu sporą dawkę doświadczenia. Praca pozwoliła autorowi na nauczenie się i zdobycie nowych umiejętności dotyczących tworzenia hybrydowych aplikacji mobilnych w technologiach webowych oraz pisania serwerów API dla nich.
+W pracy została przedstawiona architektura systemu, sposób komunikacji wewnątrz niego, instrukcja uruchomienia aplikacji, konfiguracji oraz jej używania.
 
-Aplikacja może być w przyszłości rozwijana i wzbogacana o nowe funkcjonalności. Istnieje wiele pomysłów na dalszy rozwój i z pewnością będzie ona nadal rozwijana. Docelowo aplikacja ma stać się konkurencyjnym oprogramowaniem do zarządzania m.in. harmonogramami lekcji nauki jazdy, śledzenia i notowania postępów w nauczaniu konkretnych kursantów oraz przydzielaniem wyposażenia instruktorów.
+Autor napotkał na wiele trudności, które udało mu się rozwiązać, co umożliwiło mu zdobycie nowych doświadczeń. Praca umożliwiła autorowi nauczenie się i nabycie nowych umiejętności dotyczących tworzenia hybrydowych aplikacji mobilnych w technologiach webowych oraz pisania serwerów API dla nich.
+
+Aplikacja może być w przyszłości rozwijana i wzbogacana o nowe funkcjonalności. Istnieje wiele pomysłów na dalszy rozwój i z pewnością będzie ona nadal rozwijana. Docelowo aplikacja ma stać się konkurencyjnym oprogramowaniem do zarządzania m.in. harmonogramami lekcji nauki jazdy, śledzenia i notowania postępów w nauczaniu konkretnych kursantów oraz przydzielaniem wyposażenia \mbox{instruktorów}.
 
 \backmatter
 
